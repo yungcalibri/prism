@@ -1,0 +1,8 @@
+:~  [%title 'Prism']
+    [%info 'A URL shortener for your urbit']
+    [%color 0xff.ffff]
+    [%version [0 1 0]]
+    [%website 'https://github.com/yungcalibri/prism']
+    [%license 'MIT']
+    [%site /apps/prism]
+==
