@@ -28,8 +28,10 @@
   ::  %direct: add a new wright
   ::  %defect: disable an existing wright
   ::  %renege: re-enable a wright
+  ::  %delete: delete a wright
   $%  [%direct =wright toward=@t]
       [%defect =wright]
       [%renege =wright]
+      [%delete =wright]
   ==
 --
