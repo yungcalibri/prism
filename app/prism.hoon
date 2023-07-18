@@ -1,5 +1,5 @@
 /-  *prism
-/+  default-agent, dbug, *prism, server, schooner, verb
+/+  default-agent, dbug, *prism, pv=prism-view, server, schooner, verb
 |%
 +$  card  card:agent:gall
 +$  versioned-state
@@ -97,6 +97,12 @@
     ^-  (quip card _state)
     =/  site  site.req
     ?+    site  dump
+    ::
+        [%apps %prism ~]
+      ?.  authenticated.inbound-request  dump
+      :_  state
+      (send [200 ~ [%manx (~(home pv state))]])
+    ::
         [%apps %prism @t ~]  :: /apps/prism/{path in paths.state}
       ::  it has to be a valid @ta or it won't go in paths.state
       ?.  ((sane %ta) i.t.t.site)  dump
@@ -113,12 +119,6 @@
         (~(jab by snoop.state) empath beth)
       :_  state(snoop new-snoop)
       (send [302 ~ [%redirect (~(got by paths.state) empath)]])
-    ::
-        [%apps %prism ~]
-      ?.  authenticated.inbound-request  dump
-      :_  state
-      (send [200 ~ [%plain "Hi there. No UI yet! github yungcalibri/prism"]])
-      :: (send [200 ~ [%manx (~(home pv state))]])
     ==
   ::  authenticated GET
   ::++  get
@@ -204,8 +204,4 @@
       brats  clean-brats
     ==
   ==
-::
-:: ++  viz
-::   |_  empath=@ta
-::   ++  snoop
 --
