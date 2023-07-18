@@ -113,6 +113,12 @@
         (~(jab by snoop.state) empath beth)
       :_  state(snoop new-snoop)
       (send [302 ~ [%redirect (~(got by paths.state) empath)]])
+    ::
+        [%apps %prism ~]
+      ?.  authenticated.inbound-request  dump
+      :_  state
+      (send [200 ~ [%plain "Hi there. No UI yet! github yungcalibri/prism"]])
+      :: (send [200 ~ [%manx (~(home pv state))]])
     ==
   ::  authenticated GET
   ::++  get
@@ -187,10 +193,15 @@
     ~|  "There is no forward from /apps/prism/{<wright.act>}"
     ?>  (~(has by paths) wright.act)
     ?>  (~(has by snoop) wright.act)
+    =/  clean-brats
+      ?:  (~(has in brats) wright.act)
+        (~(del in brats) wright.act)
+      brats
     :-  ~
     %=  state
       paths  (~(del by paths) wright.act)
       snoop  (~(del by snoop) wright.act)
+      brats  clean-brats
     ==
   ==
 ::
