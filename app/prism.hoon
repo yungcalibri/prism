@@ -1,5 +1,5 @@
 /-  *prism
-/+  default-agent, dbug, *prism, pv=prism-view, server, schooner, verb
+/+  default-agent, dbug, *prism, view=prism-view, server, schooner, verb
 |%
 +$  card  card:agent:gall
 +$  versioned-state
@@ -45,26 +45,38 @@
     |=  [=mark =vase]
     ^-  (quip card _this)
     ?+    mark  (on-poke:def mark vase)
-        %handle-http-request
-      ?>  =(src.bowl our.bowl)
-      =/  req  !<([@ta =inbound-request:eyre] vase)
-      =^  cards  state
-        ^-  (quip card _state)
-        ::  unauthenticated requests are all handled by the pub arm.
-        :: ?.  authenticated.request.req
-          (~(pub handle-http req))
-        ::  authenticated requests are handled by the arm matching
-        ::  the request method.
-        :: ?+    method.request.req  ~(get handle-http req)
-        ::     %'POST'
-        ::   ~(pot handle-http req)
-        :: --
-      [cards this]
-    ::
+      ::
         %prism-action
       ?>  =(src.bowl our.bowl)
       =^  cards  state
         (handle-action !<(prism-action vase))
+      [cards this]
+      ::
+        %handle-http-request
+      ?>  =(src.bowl our.bowl)
+      =/  req  !<([eyre-id=@ta =inbound-request:eyre] vase)
+      ::  ehh. is it worth feeding this into handle-http?
+      :: or is that pointless?
+      =*  dump
+        :_  state
+        (response:schooner eyre-id.req 404 ~ [%none ~])
+      =^  cards  state
+        ^-  (quip card _state)
+        ::  unauthenticated requests are all handled by the pub arm.
+        ?.  authenticated.inbound-request.req
+          ~(pub handle-http req)
+        ::  authenticated requests are handled by the arm matching
+        ::  the request method.
+        ?+    method.request.inbound-request.req  dump
+            %'GET'
+          ~(get handle-http req)
+          ::
+            %'POST'
+          ~(pot handle-http req)
+          ::
+            %'DELETE'
+          ~(del handle-http req)
+        ==
       [cards this]
     ==
   ::
@@ -93,15 +105,9 @@
       dump  [(send [404 ~ [%none ~]]) state]
   ::  all public requests
   ++  pub
-    |.
     ^-  (quip card _state)
     =/  site  site.req
     ?+    site  dump
-    ::
-        [%apps %prism ~]
-      ?.  authenticated.inbound-request  dump
-      :_  state
-      (send [200 ~ [%manx (~(home pv state))]])
     ::
         [%apps %prism @t ~]  :: /apps/prism/{path in paths.state}
       ::  it has to be a valid @ta or it won't go in paths.state
@@ -121,8 +127,16 @@
       (send [302 ~ [%redirect (~(got by paths.state) empath)]])
     ==
   ::  authenticated GET
-  ::++  get
-  ::  |.
+  ++  get
+    ^-  (quip card _state)
+    =/  site  site.req
+    ?+    site  dump
+    ::
+        [%apps %prism ~]
+      :_  state
+      (send [200 ~ [%manx ~(home view state)]])
+    ==
+  ::++  old-get
   ::  ^-  (quip card _state)
   ::  ?+    site  dump
   ::      ::  snoop on this link
@@ -142,15 +156,13 @@
   ::    [(send [302 ~ [%redirect (~(got by paths.state) empath)]]) state]
   ::    --
   ::  authenticated POST
-  :: ++  pot
-  ::   |.
-  ::   ^-  (quip card _state)
-  ::   ?+    site  [(send [404 ~ [%none ~]] state)]
-  ::       [@t ~]
+  ++  pot
+    ^-  (quip card _state)
+    dump
   ::  authenticated DELETE
-  :: ++  del
-  ::   |.
-  ::   ^-  (quip card _state)
+  ++  del
+    ^-  (quip card _state)
+    dump
   --
 ::
 ++  handle-action
