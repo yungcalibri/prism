@@ -24,6 +24,9 @@
       ;link
         =rel   "stylesheet"
         =href  "https://unpkg.com/@fontsource/cousine@5.0.5/index.css";
+      ;link
+        =rel   "stylesheet"
+        =href  "https://unpkg.com/@fontsource/anybody@5.0.5/index.css";
       ;script
         =type  "module"
         =src   "https://unpkg.com/@yungcalibri/layout@0.1.5/umd/bundle.js";
@@ -60,8 +63,8 @@
         ;stack-l(space "var(--s0)", style "align-items: stretch;")
           ;a/"/apps/prism": About Prism
           ;a/"/apps/prism/paths": Manage shortlinks
-          ;a/""
-            =style  "cursor: not-allowed;": Statistics
+          ;span
+            =style  "text-decoration: line-through; cursor: not-allowed;": Statistics
         ==
       ==
       ;footer(class "padding:1rem position:sticky bottom:0")
@@ -75,6 +78,7 @@
     ::
       ;*  kid
       ::
+      ;+  .:usage
       ;iframe
         =src        "/apps/webterm"
         =scrolling  "no"
@@ -133,46 +137,50 @@
     ; For the moment, you can interact with Prism from the terminal or
     ; webterm.
   ==
-  ;p
-    ; All commands are invoked with the mark
-    ;code: prism-action
-    ; , like:
+  ::  end content
   ==
-  ;p
-    ;code:":prism &prism-action [...]"
-  ==
-  ;p
-    ; The following commands are available:
-    ;ul
-      ;li
-        ;code:"%direct"
-        ;span:" to create a new redirect."
-        ;br;
-        ;code:"[%direct ~.fragment 'https://urbit.org']"
-        ;br;
-        ;span:"This will be accessible at /apps/prism/fragment."
+::
+++  usage
+  ^-  manx
+  ;aside#usage(style "align-self: end;")
+    ;p
+      ; All commands are invoked with the mark
+      ;code: prism-action
+      ; , like:
+    ==
+    ;pre
+      ;code:":prism &prism-action [...]"
+    ==
+    ;hr;
+    ;p
+      ; The following commands are available:
+    ==
+    ;stack-l(space "var(--s-1)")
+      ;div
+        ;pre
+          ;code:"[%direct ~.fragment 'https://urbit.org']"
+        ==
+        ;div:"To create a redirect from /apps/prism/fragment to https://urbit.org."
       ==
-      ;li
-        ;code:"%defect"
-        ;span:" to disable an existing redirect."
-        ;br;
-        ;code:"[%defect ~.fragment]"
+      ;div
+        ;pre
+          ;code:"[%defect ~.fragment]"
+        ==
+        ;div:" to disable an existing redirect."
       ==
-      ;li
-        ;code:"%renege"
-        ;span:" to re-enable a previously disabled redirect."
-        ;br;
-        ;code:"[%renege ~.fragment]"
+      ;div
+        ;pre
+          ;code:"[%renege ~.fragment]"
+        ==
+        ;div:" to re-enable a previously disabled redirect."
       ==
-      ;li
-        ;code:"%delete"
-        ;span:" to permanently delete a redirect and all tracking data associated with it."
-        ;br;
-        ;code:"[%delete ~.fragment]"
+      ;div
+        ;pre
+          ;code:"[%delete ~.fragment]"
+        ==
+        ;div:" to permanently delete a redirect and all tracking data associated with it."
       ==
     ==
-  ==
-  ::  end content
   ==
 ::  +paths: enumerates shortlinks with their targets and status
 ++  paths
@@ -229,6 +237,22 @@
   }
   hr {
     width: 100%;
+  }
+  aside {
+    font-family: 'Anybody', sans-serif;
+    font-size: 10pt;
+    background-color: #177;
+    border: var(--s-3) groove white;
+    padding: var(--s-1);
+  }
+  aside pre {
+    margin-block: 0;
+    padding-block: var(--s-1);
+    background-color: #335;
+  }
+  aside pre + div {
+    margin-block: var(--s-2);
+    text-align: right;
   }
   a:link {
     color: #fff;
