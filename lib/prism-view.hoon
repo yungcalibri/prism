@@ -57,10 +57,11 @@
       ==
       ;hr;
       ;nav(hx-target "#content", hx-select "#content")
-        ;stack-l(space "var(--s0)")
-          ;button(hx-get "/apps/prism"): About Prism
-          ;button(hx-get "/apps/prism/paths"): Manage shortlinks
-          ;button(hx-get "/apps/prism/snoop", hx-disable "", disabled ""): Statistics
+        ;stack-l(space "var(--s0)", style "align-items: stretch;")
+          ;a/"/apps/prism": About Prism
+          ;a/"/apps/prism/paths": Manage shortlinks
+          ;a/""
+            =style  "cursor: not-allowed;": Statistics
         ==
       ==
       ;footer(class "padding:1rem position:sticky bottom:0")
