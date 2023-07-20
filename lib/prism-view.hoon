@@ -78,13 +78,15 @@
     ::
       ;*  kid
       ::
-      ;+  .:usage
-      ;iframe
-        =src        "/apps/webterm"
-        =scrolling  "no"
-        =style      "justify-self: end; align-self: end;"
-        =width      "600"
-        =height     "530";
+      ;stack-l
+        ;+  .:usage
+        ;iframe
+          =src        "/apps/webterm"
+          =scrolling  "no"
+          =style      "justify-self: end; align-self: end;"
+          =width      "600"
+          =height     "530";
+      ==
     ==
   ==
 ::  +home: home page (for the beta, anyway) with details about Prism
@@ -142,7 +144,8 @@
 ::
 ++  usage
   ^-  manx
-  ;aside#usage(style "align-self: end;")
+  ;aside#usage
+    ;h1: Usage
     ;p
       ; All commands are invoked with the mark
       ;code: prism-action
@@ -158,25 +161,41 @@
     ;stack-l(space "var(--s-1)")
       ;div
         ;pre
-          ;code:"[%direct ~.fragment 'https://urbit.org']"
+          ;code
+            ;span: [
+            ;em:"%direct"
+            ;span:" ~.fragment 'https://urbit.org']"
+          ==
         ==
-        ;div:"To create a redirect from /apps/prism/fragment to https://urbit.org."
+        ;div:"to create a redirect from /apps/prism/fragment to https://urbit.org."
       ==
       ;div
         ;pre
-          ;code:"[%defect ~.fragment]"
+          ;code
+            ;span:"["
+            ;em:"%defect"
+            ;span:" ~.fragment]"
+          ==
         ==
         ;div:" to disable an existing redirect."
       ==
       ;div
         ;pre
-          ;code:"[%renege ~.fragment]"
+          ;code
+            ;span:"["
+            ;em:"%renege"
+            ;span:" ~.fragment]"
+          ==
         ==
         ;div:" to re-enable a previously disabled redirect."
       ==
       ;div
         ;pre
-          ;code:"[%delete ~.fragment]"
+          ;code
+            ;span:"["
+            ;em:"%delete"
+            ;span:" ~.fragment]"
+          ==
         ==
         ;div:" to permanently delete a redirect and all tracking data associated with it."
       ==
@@ -235,6 +254,10 @@
     border-radius: 0.25ch;
     background-color: #335;
   }
+  code em {
+    font-style: normal;
+    color: #f95;
+  }
   hr {
     width: 100%;
   }
@@ -242,7 +265,7 @@
     font-family: 'Anybody', sans-serif;
     font-size: 10pt;
     background-color: #177;
-    border: var(--s-3) groove white;
+    border: var(--s-3) outset white;
     padding: var(--s-1);
   }
   aside pre {
