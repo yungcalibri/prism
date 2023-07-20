@@ -7,7 +7,7 @@
   %-  document
   %-  frame
     kid
-::
+::  +document: HTML document with head content including all styles and scripts
 ++  document
   |=  kid=manx
   ^-  manx
@@ -42,7 +42,7 @@
     ::
     ==
   ==
-::
+::  +frame: layout frame with navigation and title placard
 ++  frame
   |=  kid=marl
   ^-  manx
@@ -60,26 +60,29 @@
         ;stack-l(space "var(--s0)")
           ;button(hx-get "/apps/prism"): About Prism
           ;button(hx-get "/apps/prism/paths"): Manage shortlinks
-          ;button(hx-get "/apps/prism/snoop"): Statistics
+          ;button(hx-get "/apps/prism/snoop", hx-disable "", disabled ""): Statistics
         ==
       ==
-      ;footer
+      ;footer(class "padding:1rem position:sticky bottom:0")
         ;a/"https://github.com/yungcalibri/prism": Github
       ==
     ==
     ::  sidebar right side
     ;center-l#content
+      =style  "min-height: 95vh;"
+      =class  "display:grid"
     ::
-    ;*  kid
-    ::
-    ;iframe
-      =src  "/apps/webterm"
-      =scrolling  "no"
-      =width  "600"
-      =height  "530";
+      ;*  kid
+      ::
+      ;iframe
+        =src        "/apps/webterm"
+        =scrolling  "no"
+        =style      "justify-self: end; align-self: end;"
+        =width      "600"
+        =height     "530";
     ==
   ==
-::
+::  +home: home page (for the beta, anyway) with details about Prism
 ++  home
   ^-  manx
   %-  page
@@ -123,7 +126,7 @@
   ;p
     ; As mentioned, this UI will be updated regularly, but if you have
     ; suggestions or comments, I encourage you to visit the Github repo
-    ; (link in the upper left corner) and submit an issue.
+    ; (link in the lower left corner) and submit an issue.
   ==
   ;p
     ; For the moment, you can interact with Prism from the terminal or
@@ -170,6 +173,35 @@
   ==
   ::  end content
   ==
+::  +paths: enumerates shortlinks with their targets and status
+++  paths
+  ^-  manx
+  %-  page
+  ;*  ;=
+  ::  begin content
+  ;stack-l(space "var(--s2)")
+    ;*  %+  turn
+          ::  this arm is called paths, ^paths is from the sample
+          ~(tap by ^paths)
+        |=  [wright=@ta toward=@t]
+        ;stack-l(space "var(--s0)")
+          ;cluster-l(space "var(--s-1)")
+            ; Path:
+            ;code: {<wright>}
+          ==
+          ;cluster-l(space "var(--s-1)")
+            ; Target:
+            ;code: {<toward>}
+            ;code(style "margin-inline-start: auto;")
+            ;+  ;/  ?:  (~(has in brats) wright)
+                      "Disabled"
+                    "Enabled"
+            ==
+          ==
+        ==
+  ==
+  ::  end content
+  ==
 ::
 ++  style
   ^~
@@ -182,6 +214,8 @@
     font-family: 'Castoro', serif;
     background-color: #112;
     color: #fff;
+    margin: 0 !important;
+    padding: var(--s1);
   }
   code {
     font-family: 'Cousine', monospace;
@@ -200,6 +234,18 @@
   }
   a:visited {
     color: #ccc;
+  }
+  .padding\:1rem {
+    padding: 1rem !important;
+  }
+  .position\:sticky {
+    position: sticky !important;
+  }
+  .bottom\:0 {
+    bottom: 0 !important;
+  }
+  display\:grid {
+    display: grid !important;
   }
   '''
 --
