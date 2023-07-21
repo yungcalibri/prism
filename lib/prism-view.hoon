@@ -63,7 +63,6 @@
         ;stack-l(space "var(--s0)", style "align-items: stretch;")
           ;a/"/apps/prism": About Prism
           ;a/"/apps/prism/shortlinks": Manage shortlinks
-          ;a/"/apps/prism/stats": Statistics
         ==
       ==
       ;footer(class "padding:1rem position:sticky bottom:0")
@@ -200,38 +199,9 @@
       ==
     ==
   ==
-::  +shortlinks: enumerates shortlinks with their targets and status
+::  +shortlinks: shows tracking statistics about shortlinks, and
+::  (eventually) provides controls to manage them.
 ++  shortlinks
-  ^-  manx
-  %-  page
-  ?.  (gth ~(wyt by paths) 0)
-    ;+  ;h2: No redirects created yet
-  ;*  ;=
-  ::  begin content
-  ;stack-l(space "var(--s2)")
-    ;*  %+  turn
-          ~(tap by paths)
-        |=  [wright=@ta toward=@t]
-        ;stack-l(space "var(--s0)")
-          ;cluster-l(space "var(--s-1)")
-            ; Path:
-            ;code: {<wright>}
-          ==
-          ;cluster-l(space "var(--s-1)")
-            ; Target:
-            ;code: {<toward>}
-            ;code(style "margin-inline-start: auto;")
-            ;+  ;/  ?:  (~(has in brats) wright)
-                      "Disabled"
-                    "Enabled"
-            ==
-          ==
-        ==
-  ==
-  ::  end content
-  ==
-::  +stats: shows tracking statistics about shortlinks.
-++  stats
   ^-  manx
   %-  page
   ?.  (gth ~(wyt by paths) 0)
@@ -244,20 +214,27 @@
     |=  [wright=@ta toward=@t]
     =/  beth=breath  (~(got by snoop) wright)
     =/  hits  (~(gut bi beth) '' '' 0)
-    ;div
-      ;cluster-l
-        =class  "justify-content:space-evenly"
-        ;span
+    ;stack-l
+      ;sidebar-l(sideWidth "20ch")
+        ;div
           ; Path:
+          ;br;
           ;code: {<wright>}
         ==
-        ;span
+        ;div
           ; Target:
+          ;br;
           ;code: {<toward>}
+          ;br;
+          ;code
+          ;+  ;/  ?:  (~(has in brats) wright)
+                    "Disabled"
+                  "Enabled"
+          ==
+          ;br;
+          ;br;
+          ; Total Hits: {<hits>}
         ==
-      ==
-      ;cluster-l(class "justify-content:center", style "padding: var(--s1)")
-        ;span:"Total Hits: {<hits>}"
       ==
     ==
   ==
