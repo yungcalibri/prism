@@ -130,7 +130,7 @@
   ++  get
     ^-  (quip card _state)
     =/  site  site.req
-    ?+    site  dump
+    ?+    site  pub
     ::
         [%apps %prism ~]
       :_  state
