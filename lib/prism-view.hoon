@@ -62,9 +62,8 @@
       ;nav(hx-target "#content", hx-select "#content")
         ;stack-l(space "var(--s0)", style "align-items: stretch;")
           ;a/"/apps/prism": About Prism
-          ;a/"/apps/prism/paths": Manage shortlinks
-          ;span
-            =style  "text-decoration: line-through; cursor: not-allowed;": Statistics
+          ;a/"/apps/prism/shortlinks": Manage shortlinks
+          ;a/"/apps/prism/stats": Statistics
         ==
       ==
       ;footer(class "padding:1rem position:sticky bottom:0")
@@ -201,16 +200,17 @@
       ==
     ==
   ==
-::  +paths: enumerates shortlinks with their targets and status
-++  paths
+::  +shortlinks: enumerates shortlinks with their targets and status
+++  shortlinks
   ^-  manx
   %-  page
+  ?.  (gth ~(wyt by paths) 0)
+    ;+  ;h2: No redirects created yet
   ;*  ;=
   ::  begin content
   ;stack-l(space "var(--s2)")
     ;*  %+  turn
-          ::  this arm is called paths, ^paths is from the sample
-          ~(tap by ^paths)
+          ~(tap by paths)
         |=  [wright=@ta toward=@t]
         ;stack-l(space "var(--s0)")
           ;cluster-l(space "var(--s-1)")
@@ -227,6 +227,39 @@
             ==
           ==
         ==
+  ==
+  ::  end content
+  ==
+::  +stats: shows tracking statistics about shortlinks.
+++  stats
+  ^-  manx
+  %-  page
+  ?.  (gth ~(wyt by paths) 0)
+    ;+  ;h2: No redirects created yet
+  ;*  ;=
+  ::  begin content
+  ;stack-l(space "var(--s2)")
+    ;*  %+  turn
+      ~(tap by paths)
+    |=  [wright=@ta toward=@t]
+    =/  beth=breath  (~(got by snoop) wright)
+    =/  hits  (~(gut bi beth) '' '' 0)
+    ;div
+      ;cluster-l
+        =class  "justify-content:space-evenly"
+        ;span
+          ; Path:
+          ;code: {<wright>}
+        ==
+        ;span
+          ; Target:
+          ;code: {<toward>}
+        ==
+      ==
+      ;cluster-l(class "justify-content:center", style "padding: var(--s1)")
+        ;span:"Total Hits: {<hits>}"
+      ==
+    ==
   ==
   ::  end content
   ==

@@ -136,9 +136,13 @@
       :_  state
       (send [200 ~ [%manx ~(home view state)]])
     ::
-        [%apps %prism %paths ~]
+        [%apps %prism %shortlinks ~]
       :_  state
-      (send [200 ~ [%manx ~(paths view state)]])
+      (send [200 ~ [%manx ~(shortlinks view state)]])
+    ::
+        [%apps %prism %stats ~]
+      :_  state
+      (send [200 ~ [%manx ~(stats view state)]])
     ==
   ::++  old-get
   ::  ^-  (quip card _state)
