@@ -64,7 +64,7 @@
       ;nav(class "justify-content:end")
         ;stack-l(space "var(--s0)", style "align-items: stretch;")
           ;a/"/apps/prism": About Prism
-          ;a/"/apps/prism/shortlinks": Manage shortlinks
+          ;a/"/apps/prism/shortlinks": Shortlinks
         ==
       ==
       ;hr;
@@ -239,33 +239,39 @@
     ;+  ;h2: No redirects created yet
   ;*  ;=
   ::  begin content
-  ;stack-l(space "var(--s2)")
+  ;h2: Shortlinks
+  ;stack-l(space "var(--s0)")
     ;*  %+  turn
       ~(tap by paths)
     |=  [wright=@ta toward=@t]
     =/  beth=breath  (~(got by snoop) wright)
     =/  hits  (~(gut bi beth) '' '' 0)
+    =/  brat  (~(has in brats) wright)
     ;stack-l
-      ;sidebar-l(sideWidth "20ch")
+      =class  "shortlink {?:(brat 'disabled' '')}";
+      ;section
         ;div
-          ; Path:
-          ;br;
-          ;code: {<wright>}
-        ==
-        ;div
-          ; Target:
-          ;br;
-          ;code: {<toward>}
-          ;br;
+          ; From:
           ;code
-          ;+  ;/  ?:  (~(has in brats) wright)
-                    "Disabled"
-                  "Enabled"
+            ;+  ;/  "/apps/prism/"
+            ;em:"{(trip wright)}"
           ==
-          ;br;
-          ;br;
-          ; Total Hits: {<hits>}
         ==
+        ;div
+          ; To:
+          ;a/"{(trip toward)}"
+            ;code: {(trip toward)}
+          ==
+        ==
+      ==
+      ;div
+        ;+  ;/  ?:  (~(has in brats) wright)
+                  "Disabled"
+                "Enabled"
+        ;+  ;/  " — {<hits>} "
+        ;+  ;/  ?:  =(hits 1)
+                  "visitor"
+                "visitors"
       ==
     ==
   ==
@@ -341,6 +347,14 @@
   }
   display\:grid {
     display: grid !important;
+  }
+  .shortlink {
+    border-width: var(--s-5);
+    border-style: outset;
+    border-color: white;
+    border-radius: var(--s-3);
+    background-color: #224;
+    padding: var(--s-1);
   }
   '''
 --
