@@ -53,22 +53,26 @@
   ::  begin content
   ;sidebar-l(space "var(--s2)", sideWidth "15ch")
     :: sidebar left side
-    ;stack-l(splitAfter "3")
-      ;center-l(intrinsic "")
+    ;stack-l(splitAfter "3", class "text-align:right", style "min-height: 50vh")
+      ;center-l()
         ;h1: Prism ◈ 
         ;span
           ;small: By calibri
         ==
       ==
       ;hr;
-      ;nav(hx-target "#content", hx-select "#content")
+      ;nav(class "justify-content:end")
         ;stack-l(space "var(--s0)", style "align-items: stretch;")
           ;a/"/apps/prism": About Prism
           ;a/"/apps/prism/shortlinks": Manage shortlinks
         ==
       ==
-      ;footer(class "padding:1rem position:sticky bottom:0")
-        ;a/"https://github.com/yungcalibri/prism": Github
+      ;hr;
+      ;footer(class "position:sticky bottom:0")
+        ;cluster-l(class "justify-content:end")
+          ;a/"https://github.com/yungcalibri/prism": Prism on Github
+          ;a/"https://twitter.com/yung_calibri": @yungcalibri on Twitter
+        ==
       ==
     ==
     ::  sidebar right side
@@ -112,8 +116,8 @@
   ==
   ;p
     ; Second, when someone follows one of these redirects, Prism will
-    ; make a note of the details of the request they made. Specifically,
-    ; Prism will examine an inbound request for its
+    ; increment a hit counter and make a note of the details of the request
+    ; they made. Specifically, Prism will examine an inbound request for its
     ;code:"'Referer'"
     ; header, and any
     ;code:"utm_*"
@@ -133,15 +137,36 @@
     ; of it like a people counter.
   ==
   ;img@"https://s3.us-west-004.backblazeb2.com/demiurge/normul-postem/2023.7.18..04.42.00-d735aaec09f5d1c0079f22e577591157.png"(width "100%");
-  ;hr;
   ;p
-    ; As mentioned, this UI will be updated regularly, but if you have
-    ; suggestions or comments, I encourage you to visit the Github repo
-    ; (link in the lower left corner) and submit an issue.
+    ; As mentioned, this UI is an interim thing. It will be updated regularly.
+    ; The idea is to make all functionality accessible from the start, using
+    ; the embedded webterm below. Bit by bit, that functionality will be
+    ; replicated in the web UI, until the terminal is obviated enough that it
+    ; can live on its own page.
   ==
   ;p
-    ; For the moment, you can interact with Prism from the terminal or
-    ; webterm.
+    ; That said, I have no idea what features I should add to the UI first,
+    ; so please get in touch to tell me what you want to see here! The best
+    ; ways to do that are:
+    ;ul
+      ;li
+        ; to visit
+        ;a/"https://github.com/yungcalibri/prism":"the Github repo"
+        ::  can't do &nbsp; so this is the next best thing I guess
+        ;+  ;/  " and submit an issue, or"
+      ==
+      ;li
+        ; to DM me on Urbit at
+        ;code: ~normul-postem
+        ; , or
+      ==
+      ;li
+        ; to DM me on
+        ;a/"https://twitter.com/yung_calibri":"Twitter"
+        ; .
+      ==
+    ==
+    ; Thanks in advance!
   ==
   ::  end content
   ==
