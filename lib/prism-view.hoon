@@ -9,7 +9,7 @@
     kid
 ::  +document: HTML document with head content including all styles and scripts
 ++  document
-  |=  kid=manx
+  |=  kid=marl
   ^-  manx
   ;html
     ;head
@@ -41,14 +41,16 @@
     ==
     ;body(hx-ext "json-enc,include-vals")
     ::
-    ;+  kid
+    ;*  kid
     ::
     ==
   ==
 ::  +frame: layout frame with navigation and title placard
 ++  frame
   |=  kid=marl
-  ^-  manx
+  ^-  marl
+  ;*  ;=
+  ::  begin content
   ;sidebar-l(space "var(--s2)", sideWidth "15ch")
     :: sidebar left side
     ;stack-l(splitAfter "3")
@@ -70,22 +72,26 @@
       ==
     ==
     ::  sidebar right side
-    ;center-l#content
-      =style  "min-height: 95vh;"
-      =class  "display:grid"
-    ::
-      ;*  kid
+    ;center-l
+      ;section#content
       ::
-      ;stack-l
-        ;+  .:usage
-        ;iframe
-          =src        "/apps/webterm"
-          =scrolling  "no"
-          =style      "justify-self: end; align-self: end;"
-          =width      "600"
-          =height     "530";
+        ;*  kid
+        ::
       ==
     ==
+  ==
+  ;center-l(style "max-inline-size: calc(100vw - var(--s1));")
+    ;sidebar-l
+      =sideWidth   "20rem"
+      =style       "max-inline-size: 100%;"
+      ;+  usage
+      ;iframe
+        =src        "/apps/webterm"
+        =style      "min-block-size: 20lh;"
+        =scrolling  "no";
+    ==
+  ==
+  ::  end content
   ==
 ::  +home: home page (for the beta, anyway) with details about Prism
 ++  home
@@ -255,6 +261,9 @@
     margin: 0 !important;
     padding: var(--s1);
   }
+  body > * + * {
+    margin-block-start: var(--s1);
+  }
   code {
     font-family: 'Cousine', monospace;
     padding-inline: 0.25ch;
@@ -274,9 +283,12 @@
   aside {
     font-family: 'Anybody', sans-serif;
     font-size: 10pt;
+    line-height: 1.2;
     background-color: #177;
     border: var(--s-3) outset white;
     padding: var(--s-1);
+    max-inline-size: fit-content;
+    margin-inline: auto;
   }
   aside pre {
     margin-block: 0;
