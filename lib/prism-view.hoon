@@ -107,8 +107,13 @@
   ::  begin content
   ;p
     ; This is Prism, a small app for getting people where they need to go.
-    ; This UI, such as it is, will be updated regularly until it
-    ; satisfies me.
+  ==
+  ;p
+    ; The UI, such as it is, will be updated regularly until it
+    ; satisfies me. All functionality is accessible via
+    ; the terminal or webterm: check the Usage placard below for details.
+    ; The more I learn about how people use Prism, the more functionality
+    ; will become available in the UI. 
   ==
   ;p
     ; Prism has two major functions: first, it redirects people from a
@@ -128,27 +133,20 @@
   ;p
     ; By tailoring your shortlink URLs, and examining the app state with
     ;code:":prism +dbug"
-    ; , you can see how many visitors came from a specific shared link.
+    ; , you can track the effectiveness of your campaigns.
     ; This data is tracked in aggregate: you might see that twenty
     ; visitors followed a shortlink with
     ;code:"utm_source=twitter"
-    ; , and ten more with
+    ; , and ten others followed one with
     ;code:"utm_source=medium"
-    ; . It is not tracked individually, which is to say that individual
+    ; . (It is not tracked individually, which is to say that individual
     ; redirects are not stored with all of their associated data. Think
-    ; of it like a people counter.
+    ; of it like a people counter.)
   ==
   ;img@"https://s3.us-west-004.backblazeb2.com/demiurge/normul-postem/2023.7.18..04.42.00-d735aaec09f5d1c0079f22e577591157.png"(width "100%");
   ;p
-    ; As mentioned, this UI is an interim thing. It will be updated regularly.
-    ; The idea is to make all functionality accessible from the start, using
-    ; the embedded webterm below. Bit by bit, that functionality will be
-    ; replicated in the web UI, until the terminal is obviated enough that it
-    ; can live on its own page.
-  ==
-  ;p
-    ; That said, I have no idea what features I should add to the UI first,
-    ; so please get in touch to tell me what you want to see here! The best
+    ; As I mentioned above, I have no idea what I should add to the UI next.
+    ; So please get in touch to tell me what you want to see here! The best
     ; ways to do that are:
     ;ul
       ;li
@@ -168,7 +166,7 @@
         ; .
       ==
     ==
-    ; Thanks in advance!
+    ; Hope you enjoy.
   ==
   ::  end content
   ==
