@@ -176,6 +176,7 @@
 ++  usage
   ^-  manx
   ;aside#usage
+    ;div.noise;
     ;h1: Usage
     ;p
       ; All commands are invoked with the mark
@@ -315,13 +316,29 @@
   }
   #usage {
     font-family: 'Anybody', sans-serif;
-    font-size: 10pt;
+    font-size: 11pt;
     line-height: 1.2;
     background-color: #177;
     border: var(--s-3) outset white;
     padding: var(--s-1);
     max-inline-size: fit-content;
     margin-inline: auto;
+    position: relative;
+    text-shadow: 0.5px 1.5px 1px darkslategray;
+  }
+  #usage code, #usage pre {
+    text-shadow: none;
+  }
+  #usage > .noise {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url(https://s3.us-west-004.backblazeb2.com/demiurge/normul-postem/2023.7.26..02.11.05-noise.svg);
+    mix-blend-mode: multiply;
+    filter: contrast(240%);
   }
   #usage pre {
     margin-block: 0;
