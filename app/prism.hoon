@@ -201,7 +201,7 @@
       %renege
     ?.  (~(has by paths) wright.act)
       ~|("There is no forward from /apps/prism/{<wright.act>}" !!)
-    ?:  (~(has in brats) wright.act)
+    ?.  (~(has in brats) wright.act)
       ~|("Path /apps/prism/{<wright.act>} is already enabled" !!)
     [~ state(brats (~(del in brats) wright.act))]
   ::
