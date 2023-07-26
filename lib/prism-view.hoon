@@ -57,7 +57,10 @@
       ;center-l()
         ;h1: Prism ◈ 
         ;span
-          ;small: By calibri
+          ;small:"By "
+          ;a/"https://twitter.com/yung_calibri"
+            ;small: calibri
+          ==
         ==
       ==
       ;hr;
@@ -71,7 +74,6 @@
       ;footer(class "position:sticky bottom:0")
         ;cluster-l(class "justify-content:end")
           ;a/"https://github.com/yungcalibri/prism": Prism on Github
-          ;a/"https://twitter.com/yung_calibri": @yungcalibri on Twitter
         ==
       ==
     ==
@@ -183,10 +185,10 @@
     ;pre
       ;code:":prism &prism-action [...]"
     ==
-    ;hr;
     ;p
       ; The following commands are available:
     ==
+    ;hr;
     ;stack-l(space "var(--s-1)")
       ;div
         ;pre
@@ -247,8 +249,8 @@
     =/  beth=breath  (~(got by snoop) wright)
     =/  hits  (~(gut bi beth) '' '' 0)
     =/  brat  (~(has in brats) wright)
-    ;stack-l
-      =class  "shortlink {?:(brat 'disabled' '')}";
+    =/  stack-class  ?:(brat "shortlink disabled" "shortlink")
+    ;stack-l(class stack-class)
       ;section
         ;div
           ; From:
@@ -311,7 +313,7 @@
   hr {
     width: 100%;
   }
-  aside {
+  #usage {
     font-family: 'Anybody', sans-serif;
     font-size: 10pt;
     line-height: 1.2;
@@ -321,14 +323,13 @@
     max-inline-size: fit-content;
     margin-inline: auto;
   }
-  aside pre {
+  #usage pre {
     margin-block: 0;
     padding-block: var(--s-1);
     background-color: #335;
   }
-  aside pre + div {
+  #usage pre + div {
     margin-block: var(--s-2);
-    text-align: right;
   }
   a:link {
     color: #fff;
@@ -355,6 +356,10 @@
     border-radius: var(--s-3);
     background-color: #224;
     padding: var(--s-1);
+  }
+  .shortlink.disabled {
+    background-color: inherit;
+    border-color: darkgray;
   }
   '''
 --
