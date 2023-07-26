@@ -29,6 +29,11 @@
     gas   t.gas
     spyr  (~(put bi spyr) p.i.gas q.i.gas +(count))
   ==
+::  +gasp-hit: increment the value at ['' ''] as a hit counter.
+++  gasp-hit
+  |=  spyr=breath
+  ^-  breath
+  (gasp spyr ~[`brite`[p='' q='']])
 ::
 ++  gasp-referer
   |=  [req=inbound-request:eyre spyr=breath]
@@ -95,6 +100,7 @@
 ++  update-breath
   |=  [req=inbound-request:eyre spyr=breath]
   ^-  breath
+  %-  gasp-hit
   %+  gasp-utms
     req
   %+  gasp-referer

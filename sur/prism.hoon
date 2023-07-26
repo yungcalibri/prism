@@ -9,6 +9,7 @@
 ::  we use this to count how many times we've seen each
 :: value of the 'Referer' header and any utm_* query
 :: parameters added to a shortlink.
+::  additionally. the value at ['' ''] is a hit counter.
 +$  breath  (mip @t @t @ud)
 ::
 ::  $paths: maps public shortlink path segment to outbound

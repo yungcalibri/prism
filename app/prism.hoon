@@ -130,15 +130,15 @@
   ++  get
     ^-  (quip card _state)
     =/  site  site.req
-    ?+    site  dump
+    ?+    site  pub
     ::
         [%apps %prism ~]
       :_  state
       (send [200 ~ [%manx ~(home view state)]])
     ::
-        [%apps %prism %paths ~]
+        [%apps %prism %shortlinks ~]
       :_  state
-      (send [200 ~ [%manx ~(paths view state)]])
+      (send [200 ~ [%manx ~(shortlinks view state)]])
     ==
   ::++  old-get
   ::  ^-  (quip card _state)
@@ -176,11 +176,11 @@
       %direct
     ::  ensure we got a valid @ta in the action (this will
     ::  be a url segment, so we have to be strict)
-    ~|  "Invalid path segment {<wright.act>}"
-    ?>  ((sane %ta) wright.act)
+    ?.  ((sane %ta) wright.act)
+      ~|("Invalid path segment {<wright.act>}" !!)
     ::  ensure we don't already have a redirect at this path
-    ~|  "Path /apps/prism/{<wright.act>} already assigned"
-    ?<  (~(has by paths) wright.act)
+    ?:  (~(has by paths) wright.act)
+      ~|("Path /apps/prism/{<wright.act>} already assigned" !!)
     ::  ensure toward is a properly formed URL
     ?~  (de-purl:html toward.act)
       ~|('URL is invalid' !!)
@@ -192,22 +192,22 @@
     ==
   ::
       %defect
-    ~|  "There is no forward from /apps/prism/{<wright.act>}"
-    ?>  (~(has by paths) wright.act)
-    ~|  "Path /apps/prism/{<wright.act>} is already disabled"
-    ?<  (~(has in brats) wright.act)
+    ?.  (~(has by paths) wright.act)
+      ~|("There is no forward from /apps/prism/{<wright.act>}" !!)
+    ?:  (~(has in brats) wright.act)
+      ~|("Path /apps/prism/{<wright.act>} is already disabled" !!)
     [~ state(brats (~(put in brats) wright.act))]
   ::
       %renege
-    ~|  "There is no forward from /apps/prism/{<wright.act>}"
-    ?>  (~(has by paths) wright.act)
-    ~|  "Path /apps/prism/{<wright.act>} is already enabled"
-    ?>  (~(has in brats) wright.act)
+    ?.  (~(has by paths) wright.act)
+      ~|("There is no forward from /apps/prism/{<wright.act>}" !!)
+    ?.  (~(has in brats) wright.act)
+      ~|("Path /apps/prism/{<wright.act>} is already enabled" !!)
     [~ state(brats (~(del in brats) wright.act))]
   ::
       %delete
-    ~|  "There is no forward from /apps/prism/{<wright.act>}"
-    ?>  (~(has by paths) wright.act)
+    ?.  (~(has by paths) wright.act)
+      ~|("There is no forward from /apps/prism/{<wright.act>}" !!)
     ?>  (~(has by snoop) wright.act)
     =/  clean-brats
       ?:  (~(has in brats) wright.act)

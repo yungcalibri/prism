@@ -9,7 +9,7 @@
     kid
 ::  +document: HTML document with head content including all styles and scripts
 ++  document
-  |=  kid=manx
+  |=  kid=marl
   ^-  manx
   ;html
     ;head
@@ -41,51 +41,63 @@
     ==
     ;body(hx-ext "json-enc,include-vals")
     ::
-    ;+  kid
+    ;*  kid
     ::
     ==
   ==
 ::  +frame: layout frame with navigation and title placard
 ++  frame
   |=  kid=marl
-  ^-  manx
+  ^-  marl
+  ;*  ;=
+  ::  begin content
   ;sidebar-l(space "var(--s2)", sideWidth "15ch")
     :: sidebar left side
-    ;stack-l(splitAfter "3")
-      ;center-l(intrinsic "")
+    ;stack-l(splitAfter "3", class "text-align:right", style "min-height: 50vh")
+      ;center-l()
         ;h1: Prism ◈ 
         ;span
-          ;small: By calibri
+          ;small:"By "
+          ;a/"https://twitter.com/yung_calibri"
+            ;small: calibri
+          ==
         ==
       ==
       ;hr;
-      ;nav(hx-target "#content", hx-select "#content")
+      ;nav(class "justify-content:end")
         ;stack-l(space "var(--s0)", style "align-items: stretch;")
           ;a/"/apps/prism": About Prism
-          ;a/"/apps/prism/paths": Manage shortlinks
-          ;span
-            =style  "text-decoration: line-through; cursor: not-allowed;": Statistics
+          ;a/"/apps/prism/shortlinks": Shortlinks
         ==
       ==
-      ;footer(class "padding:1rem position:sticky bottom:0")
-        ;a/"https://github.com/yungcalibri/prism": Github
+      ;hr;
+      ;footer(class "position:sticky bottom:0")
+        ;cluster-l(class "justify-content:end")
+          ;a/"https://github.com/yungcalibri/prism": Prism on Github
+        ==
       ==
     ==
     ::  sidebar right side
-    ;center-l#content
-      =style  "min-height: 95vh;"
-      =class  "display:grid"
-    ::
-      ;*  kid
+    ;center-l
+      ;section#content
       ::
-      ;+  .:usage
+        ;*  kid
+        ::
+      ==
+    ==
+  ==
+  ;center-l(style "max-inline-size: calc(100vw - var(--s1));")
+    ;sidebar-l
+      =sideWidth   "20rem"
+      =style       "max-inline-size: 100%;"
+      ;+  usage
       ;iframe
         =src        "/apps/webterm"
-        =scrolling  "no"
-        =style      "justify-self: end; align-self: end;"
-        =width      "600"
-        =height     "530";
+        =style      "min-block-size: 20lh;"
+        =scrolling  "no";
     ==
+  ==
+  ::  end content
   ==
 ::  +home: home page (for the beta, anyway) with details about Prism
 ++  home
@@ -95,8 +107,13 @@
   ::  begin content
   ;p
     ; This is Prism, a small app for getting people where they need to go.
-    ; This UI, such as it is, will be updated regularly until it
-    ; satisfies me.
+  ==
+  ;p
+    ; The UI, such as it is, will be updated regularly until it
+    ; satisfies me. All functionality is accessible via
+    ; the terminal or webterm: check the Usage placard below for details.
+    ; The more I learn about how people use Prism, the more functionality
+    ; will become available in the UI. 
   ==
   ;p
     ; Prism has two major functions: first, it redirects people from a
@@ -106,8 +123,8 @@
   ==
   ;p
     ; Second, when someone follows one of these redirects, Prism will
-    ; make a note of the details of the request they made. Specifically,
-    ; Prism will examine an inbound request for its
+    ; increment a hit counter and make a note of the details of the request
+    ; they made. Specifically, Prism will examine an inbound request for its
     ;code:"'Referer'"
     ; header, and any
     ;code:"utm_*"
@@ -116,33 +133,49 @@
   ;p
     ; By tailoring your shortlink URLs, and examining the app state with
     ;code:":prism +dbug"
-    ; , you can see how many visitors came from a specific shared link.
+    ; , you can track the effectiveness of your campaigns.
     ; This data is tracked in aggregate: you might see that twenty
     ; visitors followed a shortlink with
     ;code:"utm_source=twitter"
-    ; , and ten more with
+    ; , and ten others followed one with
     ;code:"utm_source=medium"
-    ; . It is not tracked individually, which is to say that individual
+    ; . (It is not tracked individually, which is to say that individual
     ; redirects are not stored with all of their associated data. Think
-    ; of it like a people counter.
+    ; of it like a people counter.)
   ==
   ;img@"https://s3.us-west-004.backblazeb2.com/demiurge/normul-postem/2023.7.18..04.42.00-d735aaec09f5d1c0079f22e577591157.png"(width "100%");
-  ;hr;
   ;p
-    ; As mentioned, this UI will be updated regularly, but if you have
-    ; suggestions or comments, I encourage you to visit the Github repo
-    ; (link in the lower left corner) and submit an issue.
-  ==
-  ;p
-    ; For the moment, you can interact with Prism from the terminal or
-    ; webterm.
+    ; As I mentioned above, I have no idea what I should add to the UI next.
+    ; So please get in touch to tell me what you want to see here! The best
+    ; ways to do that are:
+    ;ul
+      ;li
+        ; to visit
+        ;a/"https://github.com/yungcalibri/prism":"the Github repo"
+        ::  can't do &nbsp; so this is the next best thing I guess
+        ;+  ;/  " and submit an issue, or"
+      ==
+      ;li
+        ; to DM me on Urbit at
+        ;code: ~normul-postem
+        ; , or
+      ==
+      ;li
+        ; to DM me on
+        ;a/"https://twitter.com/yung_calibri":"Twitter"
+        ; .
+      ==
+    ==
+    ; Hope you enjoy.
   ==
   ::  end content
   ==
 ::
 ++  usage
   ^-  manx
-  ;aside#usage(style "align-self: end;")
+  ;aside#usage
+    ;div.noise;
+    ;h1: Usage
     ;p
       ; All commands are invoked with the mark
       ;code: prism-action
@@ -151,63 +184,97 @@
     ;pre
       ;code:":prism &prism-action [...]"
     ==
-    ;hr;
     ;p
       ; The following commands are available:
     ==
+    ;hr;
     ;stack-l(space "var(--s-1)")
       ;div
         ;pre
-          ;code:"[%direct ~.fragment 'https://urbit.org']"
+          ;code
+            ;span: [
+            ;em:"%direct"
+            ;span:" ~.fragment 'https://urbit.org']"
+          ==
         ==
-        ;div:"To create a redirect from /apps/prism/fragment to https://urbit.org."
+        ;div:"to create a redirect from /apps/prism/fragment to https://urbit.org."
       ==
       ;div
         ;pre
-          ;code:"[%defect ~.fragment]"
+          ;code
+            ;span:"["
+            ;em:"%defect"
+            ;span:" ~.fragment]"
+          ==
         ==
         ;div:" to disable an existing redirect."
       ==
       ;div
         ;pre
-          ;code:"[%renege ~.fragment]"
+          ;code
+            ;span:"["
+            ;em:"%renege"
+            ;span:" ~.fragment]"
+          ==
         ==
         ;div:" to re-enable a previously disabled redirect."
       ==
       ;div
         ;pre
-          ;code:"[%delete ~.fragment]"
+          ;code
+            ;span:"["
+            ;em:"%delete"
+            ;span:" ~.fragment]"
+          ==
         ==
         ;div:" to permanently delete a redirect and all tracking data associated with it."
       ==
     ==
   ==
-::  +paths: enumerates shortlinks with their targets and status
-++  paths
+::  +shortlinks: shows tracking statistics about shortlinks, and
+::  (eventually) provides controls to manage them.
+++  shortlinks
   ^-  manx
   %-  page
+  ?.  (gth ~(wyt by paths) 0)
+    ;+  ;h2: No redirects created yet
   ;*  ;=
   ::  begin content
-  ;stack-l(space "var(--s2)")
+  ;h2: Shortlinks
+  ;stack-l(space "var(--s0)")
     ;*  %+  turn
-          ::  this arm is called paths, ^paths is from the sample
-          ~(tap by ^paths)
-        |=  [wright=@ta toward=@t]
-        ;stack-l(space "var(--s0)")
-          ;cluster-l(space "var(--s-1)")
-            ; Path:
-            ;code: {<wright>}
-          ==
-          ;cluster-l(space "var(--s-1)")
-            ; Target:
-            ;code: {<toward>}
-            ;code(style "margin-inline-start: auto;")
-            ;+  ;/  ?:  (~(has in brats) wright)
-                      "Disabled"
-                    "Enabled"
-            ==
+      ~(tap by paths)
+    |=  [wright=@ta toward=@t]
+    =/  beth=breath  (~(got by snoop) wright)
+    =/  hits  (~(gut bi beth) '' '' 0)
+    =/  brat  (~(has in brats) wright)
+    =/  stack-class  ?:(brat "shortlink disabled" "shortlink")
+    ;stack-l(class stack-class)
+      ;section
+        ;div
+          ; From:
+          ;code
+            ;+  ;/  "/apps/prism/"
+            ;em:"{(trip wright)}"
           ==
         ==
+        ;div
+          ; To:
+          ;a/"{(trip toward)}"
+            ;code: {(trip toward)}
+          ==
+        ==
+      ==
+      ;div
+        ;+  ;/  ?:  (~(has in brats) wright)
+                  "Disabled"
+                "Enabled"
+        ;+  ;/  " — {<hits>} "
+        ;+  ;/  ?:  =(hits 1)
+                  "visitor"
+                "visitors"
+      ==
+    ==
   ==
   ::  end content
   ==
@@ -226,6 +293,9 @@
     margin: 0 !important;
     padding: var(--s1);
   }
+  body > * + * {
+    margin-block-start: var(--s1);
+  }
   code {
     font-family: 'Cousine', monospace;
     padding-inline: 0.25ch;
@@ -235,24 +305,46 @@
     border-radius: 0.25ch;
     background-color: #335;
   }
+  code em {
+    font-style: normal;
+    color: #f95;
+  }
   hr {
     width: 100%;
   }
-  aside {
+  #usage {
     font-family: 'Anybody', sans-serif;
-    font-size: 10pt;
+    font-size: 11pt;
+    line-height: 1.2;
     background-color: #177;
-    border: var(--s-3) groove white;
+    border: var(--s-3) outset white;
     padding: var(--s-1);
+    max-inline-size: fit-content;
+    margin-inline: auto;
+    position: relative;
+    text-shadow: 0.5px 1.5px 1px darkslategray;
   }
-  aside pre {
+  #usage code, #usage pre {
+    text-shadow: none;
+  }
+  #usage > .noise {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url(https://s3.us-west-004.backblazeb2.com/demiurge/normul-postem/2023.7.26..02.11.05-noise.svg);
+    mix-blend-mode: multiply;
+    filter: contrast(240%);
+  }
+  #usage pre {
     margin-block: 0;
     padding-block: var(--s-1);
     background-color: #335;
   }
-  aside pre + div {
+  #usage pre + div {
     margin-block: var(--s-2);
-    text-align: right;
   }
   a:link {
     color: #fff;
@@ -271,6 +363,18 @@
   }
   display\:grid {
     display: grid !important;
+  }
+  .shortlink {
+    border-width: var(--s-5);
+    border-style: outset;
+    border-color: white;
+    border-radius: var(--s-3);
+    background-color: #224;
+    padding: var(--s-1);
+  }
+  .shortlink.disabled {
+    background-color: inherit;
+    border-color: darkgray;
   }
   '''
 --
