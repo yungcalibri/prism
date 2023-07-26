@@ -1,6 +1,7 @@
 :~  [%title 'Prism']
     [%info 'A URL shortener for your urbit']
     [%color 0xff.ffff]
+    [%image 'https://s3.us-west-004.backblazeb2.com/demiurge/normul-postem/2023.7.18..04.42.00-d735aaec09f5d1c0079f22e577591157.png']
     [%version [0 4 0]]
     [%website 'https://github.com/yungcalibri/prism']
     [%license 'MIT']
