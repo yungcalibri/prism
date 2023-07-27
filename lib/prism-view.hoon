@@ -248,38 +248,44 @@
     =/  beth=breath  (~(got by snoop) wright)
     =/  hits  (~(gut bi beth) '' '' 0)
     =/  brat  (~(has in brats) wright)
-    =/  toggle-link
-      %-  spud
-      ~[%apps %prism wright ?.(brat 'defect' 'renege')]
-    =/  stack-class  ?:(brat "shortlink disabled" "shortlink")
-    ;stack-l(class stack-class)
-      ;section
-        ;div
-          ; From:
-          ;code
-            ;+  ;/  "/apps/prism/"
-            ;em:"{(trip wright)}"
+    =/  delete-link  (spud ~[%apps %prism wright %delete])
+    =/  toggle-link  (spud ~[%apps %prism wright ?.(brat 'defect' 'renege')])
+    =/  box-class  ?:(brat "shortlink disabled" "shortlink")
+    ;sidebar-l(side "right", sideWidth "5em", class box-class)
+      ;stack-l
+        ;section
+          ;div
+            ; From:
+            ;code
+              ;+  ;/  "/apps/prism/"
+              ;em:"{(trip wright)}"
+            ==
+          ==
+          ;div
+            ; To:
+            ;a/"{(trip toward)}"
+              ;code: {(trip toward)}
+            ==
           ==
         ==
         ;div
-          ; To:
-          ;a/"{(trip toward)}"
-            ;code: {(trip toward)}
-          ==
+          ;+  ;/  ?.(brat "Enabled" "Disabled")
+          ;+  ;/  " — {<hits>} "
+          ;+  ;/  ?:(=(hits 1) "visitor" "visitors")
         ==
       ==
-      ;div
-        ;+  ;/  ?.(brat "Enabled" "Disabled")
-        ;+  ;/  " — {<hits>} "
-        ;+  ;/  ?:(=(hits 1) "visitor" "visitors")
-      ==
-      ;form
-        =hx-post    toggle-link
-        =hx-target  "#content"
-        =hx-select  "#content"
-        =class      "display:flex justify-content:end"
-        =style      "margin: 0"
-        ;button(style "flex-basis: 4rem")
+      ;stack-l(space "var(--s-1)", splitAfter "1")
+        ;button.danger
+          =hx-post     delete-link
+          =hx-confirm  "Are you sure you want to delete this link?"
+          =hx-target   "#content"
+          =hx-select   "#content"
+          ; Delete
+        ==
+        ;button
+          =hx-post    toggle-link
+          =hx-target  "#content"
+          =hx-select  "#content"
           ;+  ;/  ?.(brat "Disable" "Enable")
         ==
       ==
@@ -320,6 +326,26 @@
   }
   hr {
     width: 100%;
+  }
+  button {
+    border-style: outset;
+    border-width: var(--s-5);
+    border-radius: var(--s-4);
+    border-color: white;
+    background-color: #537;
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    color: inherit;
+    filter: brightness(110%);
+  }
+  button.danger {
+    background-color: #a32;
+  }
+  button:hover {
+    filter: brightness(90%) contrast(120%);
+  }
+  button:active {
+    filter: brightness(110%) contrast(120%);
   }
   #usage {
     font-family: 'Anybody', sans-serif;
