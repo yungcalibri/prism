@@ -73,9 +73,6 @@
           ::
             %'POST'
           ~(pot handle-http req)
-          ::
-            %'DELETE'
-          ~(del handle-http req)
         ==
       [cards this]
     ==
@@ -103,6 +100,7 @@
       send  (cury response:schooner eyre-id)
       beth  (cury update-breath inbound-request)
       dump  [(send [404 ~ [%none ~]]) state]
+      derp  [(send [500 ~ [%stock ~]]) state]
   ::  all public requests
   ++  pub
     ^-  (quip card _state)
@@ -140,33 +138,45 @@
       :_  state
       (send [200 ~ [%manx ~(shortlinks view state)]])
     ==
-  ::++  old-get
-  ::  ^-  (quip card _state)
-  ::  ?+    site  dump
-  ::      ::  snoop on this link
-  ::      [%snoop @t ~]
-  ::    ?>  ((sane %ta) ->.site)
-  ::    =/  empath  `@ta`->.site
-  ::    ?>  (~(has by paths.state) empath)
-  ::    ::  build UI with snoop.viz
-  ::    :_  state
-  ::    (send [200 ~ [%manx (~(snoop viz snoop.state) empath)]])
-  ::    ::
-  ::      [@t ~]
-  ::    ?>  ((sane %ta) -.site)
-  ::    =/  empath  `@ta`-.site
-  ::    ?>  (~(has by paths.state) empath)
-  ::    ::  we're authenticated, so don't bother tracking this one
-  ::    [(send [302 ~ [%redirect (~(got by paths.state) empath)]]) state]
-  ::    --
   ::  authenticated POST
   ++  pot
     ^-  (quip card _state)
-    dump
-  ::  authenticated DELETE
-  ++  del
-    ^-  (quip card _state)
-    dump
+    =/  site  site.req
+    ?+    site  dump
+    ::
+        [%apps %prism @t %defect ~]
+      ::  attempt to handle the defect action
+      =/  scat=(unit (quip card _state))
+        %-  mole
+        |.  (handle-action `prism-action`[%defect i.t.t.site])
+      ::  if applying the defect action failed, send 500
+      ?~  scat  derp
+      ::  otherwise add our response card to the list of effects.
+      :_  +.u.scat
+      %+  weld
+        -.u.scat
+      (send [200 ~ [%manx ~(shortlinks view +.u.scat)]])
+    ::
+        [%apps %prism @t %renege ~]
+      =/  scat=(unit (quip card _state))
+        %-  mole
+        |.  (handle-action `prism-action`[%renege i.t.t.site])
+      ?~  scat  derp
+      :_  +.u.scat
+      %+  weld
+        -.u.scat
+      (send [200 ~ [%manx ~(shortlinks view +.u.scat)]])
+    ::
+        [%apps %prism @t %delete ~]
+      =/  scat=(unit (quip card _state))
+        %-  mole
+        |.  (handle-action `prism-action`[%delete i.t.t.site])
+      ?~  scat  derp
+      :_  +.u.scat
+      %+  weld
+        -.u.scat
+      (send [200 ~ [%manx ~(shortlinks view +.u.scat)]])
+    ==
   --
 ::
 ++  handle-action

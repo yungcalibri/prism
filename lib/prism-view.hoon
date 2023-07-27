@@ -248,6 +248,9 @@
     =/  beth=breath  (~(got by snoop) wright)
     =/  hits  (~(gut bi beth) '' '' 0)
     =/  brat  (~(has in brats) wright)
+    =/  toggle-link
+      %-  spud
+      ~[%apps %prism wright ?.(brat 'defect' 'renege')]
     =/  stack-class  ?:(brat "shortlink disabled" "shortlink")
     ;stack-l(class stack-class)
       ;section
@@ -266,13 +269,19 @@
         ==
       ==
       ;div
-        ;+  ;/  ?:  (~(has in brats) wright)
-                  "Disabled"
-                "Enabled"
+        ;+  ;/  ?.(brat "Enabled" "Disabled")
         ;+  ;/  " — {<hits>} "
-        ;+  ;/  ?:  =(hits 1)
-                  "visitor"
-                "visitors"
+        ;+  ;/  ?:(=(hits 1) "visitor" "visitors")
+      ==
+      ;form
+        =hx-post    toggle-link
+        =hx-target  "#content"
+        =hx-select  "#content"
+        =class      "display:flex justify-content:end"
+        =style      "margin: 0"
+        ;button(style "flex-basis: 4rem")
+          ;+  ;/  ?.(brat "Disable" "Enable")
+        ==
       ==
     ==
   ==
