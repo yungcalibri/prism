@@ -177,12 +177,7 @@
     ;div.noise;
     ;h1: Usage
     ;p
-      ; All commands are invoked with the mark
-      ;code: prism-action
-      ; , like:
-    ==
-    ;pre
-      ;code:":prism &prism-action [...]"
+      ; All commands are invoked with generators.
     ==
     ;p
       ; The following commands are available:
@@ -192,9 +187,9 @@
       ;div
         ;pre
           ;code
-            ;span: [
-            ;em:"%direct"
-            ;span:" ~.fragment 'https://urbit.org']"
+            ;span:":prism|"
+            ;em:"direct"
+            ;span:" ~.fragment 'https://urbit.org'"
           ==
         ==
         ;div:"to create a redirect from /apps/prism/fragment to https://urbit.org."
@@ -202,9 +197,9 @@
       ;div
         ;pre
           ;code
-            ;span:"["
-            ;em:"%defect"
-            ;span:" ~.fragment]"
+            ;span:":prism|"
+            ;em:"defect"
+            ;span:" ~.fragment"
           ==
         ==
         ;div:" to disable an existing redirect."
@@ -212,9 +207,9 @@
       ;div
         ;pre
           ;code
-            ;span:"["
-            ;em:"%renege"
-            ;span:" ~.fragment]"
+            ;span:":prism|"
+            ;em:"renege"
+            ;span:" ~.fragment"
           ==
         ==
         ;div:" to re-enable a previously disabled redirect."
@@ -222,9 +217,9 @@
       ;div
         ;pre
           ;code
-            ;span:"["
-            ;em:"%delete"
-            ;span:" ~.fragment]"
+            ;span:":prism|"
+            ;em:"delete"
+            ;span:" ~.fragment"
           ==
         ==
         ;div:" to permanently delete a redirect and all tracking data associated with it."
