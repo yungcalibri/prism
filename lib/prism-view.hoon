@@ -231,11 +231,13 @@
 ++  shortlinks
   ^-  manx
   %-  page
-  ?.  (gth ~(wyt by paths) 0)
-    ;+  ;h2: No redirects created yet
   ;*  ;=
   ::  begin content
-  ;h2: Shortlinks
+  ;h2
+    ;+  ?:  (gth ~(wyt by paths) 0)
+          ;/  "Shortlinks"
+        ;/  "No shortlinks created yet"
+  ==
   ;stack-l(space "var(--s0)")
     ;*  %+  turn
       ~(tap by paths)
@@ -243,45 +245,86 @@
     =/  beth=breath  (~(got by snoop) wright)
     =/  hits  (~(gut bi beth) '' '' 0)
     =/  brat  (~(has in brats) wright)
-    =/  delete-link  (spud ~[%apps %prism wright %delete])
-    =/  toggle-link  (spud ~[%apps %prism wright ?.(brat 'defect' 'renege')])
-    =/  box-class  ?:(brat "shortlink disabled" "shortlink")
-    ;sidebar-l(side "right", sideWidth "5em", class box-class)
-      ;stack-l
-        ;section
-          ;div
-            ; From:
-            ;code
-              ;+  ;/  "/apps/prism/"
-              ;em:"{(trip wright)}"
+    =/  delete-link  (spud /apps/prism/[wright]/delete)
+    =/  toggle-link
+      (spud ~[%apps %prism wright ?.(brat 'defect' 'renege')])
+    :: =/  box-class  ?:(brat "shortlink disabled" "shortlink")
+    ;section(class "shortlink {(trip ?:(brat 'disabled' ''))}")
+      ;sidebar-l(side "right", sideWidth "5em")
+        ;stack-l
+          ;section
+            ;div
+              ; From:
+              ;code
+                ;+  ;/  "/apps/prism/"
+                ;em:"{(trip wright)}"
+              ==
+            ==
+            ;div
+              ; To:
+              ;a/"{(trip toward)}"
+                ;code: {(trip toward)}
+              ==
             ==
           ==
           ;div
-            ; To:
-            ;a/"{(trip toward)}"
-              ;code: {(trip toward)}
-            ==
+            ;+  ;/  ?.(brat "Enabled" "Disabled")
+            ;+  ;/  " — {<hits>} "
+            ;+  ;/  ?:(=(hits 1) "visitor" "visitors")
           ==
         ==
-        ;div
-          ;+  ;/  ?.(brat "Enabled" "Disabled")
-          ;+  ;/  " — {<hits>} "
-          ;+  ;/  ?:(=(hits 1) "visitor" "visitors")
+        ;stack-l(space "var(--s-1)", splitAfter "1")
+          ;button.danger
+            =hx-post     delete-link
+            =hx-confirm  "Are you sure you want to delete this link?"
+            =hx-target   "#content"
+            =hx-select   "#content"
+            ; Delete
+          ==
+          ;button
+            =hx-post    toggle-link
+            =hx-target  "#content"
+            =hx-select  "#content"
+            ;+  ;/  ?.(brat "Disable" "Enable")
+          ==
         ==
       ==
-      ;stack-l(space "var(--s-1)", splitAfter "1")
-        ;button.danger
-          =hx-post     delete-link
-          =hx-confirm  "Are you sure you want to delete this link?"
-          =hx-target   "#content"
-          =hx-select   "#content"
-          ; Delete
-        ==
-        ;button
-          =hx-post    toggle-link
+    ==
+    ;hr;
+    ;section(class "shortlink new")
+      ;stack-l
+        ;h3: New shortlink
+        ;form#new-shortlink
+          =hx-post    "/apps/prism/direct"
           =hx-target  "#content"
           =hx-select  "#content"
-          ;+  ;/  ?.(brat "Disable" "Enable")
+          ;sidebar-l(side "right", sideWidth "5em")
+            ;stack-l(space "var(--s-2)")
+              ;label
+                ; From:
+                ;br;
+                ;code: /apps/prism/
+                ;input
+                  =name         "wright"
+                  =type         "text"
+                  =pattern      "[a-zA-Z-._~]+"
+                  =required     ""
+                  =placeholder  "vienna";
+              ==
+              ;label
+                ; To:
+                ;br;
+                ;input
+                  =name         "toward"
+                  =type         "url"
+                  =required     ""
+                  =placeholder  "https://vienna.earth/";
+              ==
+            ==
+            ;stack-l(class "justify-content:end")
+              ;button: Create
+            ==
+          ==
         ==
       ==
     ==
@@ -337,10 +380,11 @@
     background-color: #a32;
   }
   button:hover {
-    filter: brightness(90%) contrast(120%);
+    filter: brightness(110%) contrast(120%);
   }
   button:active {
-    filter: brightness(110%) contrast(120%);
+    border-style: solid;
+    filter: brightness(90%) contrast(120%);
   }
   #usage {
     font-family: 'Anybody', sans-serif;
@@ -405,6 +449,16 @@
   .shortlink.disabled {
     background-color: inherit;
     border-color: darkgray;
+  }
+  .shortlink.new {
+    margin-block-start: var(--s4);
+  }
+  .shortlink.new h3 {
+    margin-top: 0;
+  }
+  .shortlink.new form {
+    margin-top: 0;
+    margin-bottom: 0;
   }
   '''
 --

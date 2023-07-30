@@ -2,6 +2,14 @@
 /+  mip, server
 |%
 ::
+++  dejs-direct
+  |=  jon=json
+  =,  dejs:format
+  ^-  prism-action
+  :-  %direct
+  %.  jon
+  (ot ~[wright+so toward+so])
+::
 ++  utm-parameters
   ^~
   ^-  (set @t)

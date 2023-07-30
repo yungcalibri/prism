@@ -97,6 +97,7 @@
 ++  handle-http
   |_  [eyre-id=@ta =inbound-request:eyre]
   +*  req   (parse-request-line:server url.request.inbound-request)
+      body  body.request.inbound-request
       send  (cury response:schooner eyre-id)
       beth  (cury update-breath inbound-request)
       dump  [(send [404 ~ [%none ~]]) state]
@@ -143,9 +144,24 @@
     ^-  (quip card _state)
     =/  site  site.req
     ?+    site  dump
-    ::
+      ::
+        [%apps %prism %direct ~]
+      ?~  body.request.inbound-request  derp
+      =/  jon=(unit json)
+        (de:json:html q.u.body.request.inbound-request)
+      ?~  jon  derp
+      =/  act=prism-action  (dejs-direct +.jon)
+      =/  scat=(unit (quip card _state))
+        %-  mole
+        |.  (handle-action act)
+      ?~  scat  derp
+      :_  +.u.scat
+      %+  weld
+        -.u.scat
+      (send [200 ~ [%manx ~(shortlinks view +.u.scat)]])
+      ::
         [%apps %prism @t %defect ~]
-      ::  attempt to handle the defect action
+      ::  attempt to handle the %defect action
       =/  scat=(unit (quip card _state))
         %-  mole
         |.  (handle-action `prism-action`[%defect i.t.t.site])
