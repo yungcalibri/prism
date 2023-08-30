@@ -309,7 +309,8 @@
                   =type         "text"
                   =pattern      "[a-zA-Z-._~]+"
                   =required     ""
-                  =placeholder  "vienna";
+                  =placeholder  "vienna"
+                  =style        "color: #f95";
               ==
               ;label
                 ; To:
@@ -351,9 +352,8 @@
   }
   code {
     font-family: 'Cousine', monospace;
-    padding-inline: 0.25ch;
+    padding: 0.25ch;
     margin-inline: 0.25ch;
-    padding-block: 0.25ch;
     margin-block: calc(-1 * 0.25ch);
     border-radius: 0.25ch;
     background-color: #335;
@@ -375,6 +375,7 @@
     padding-block: 0.25rem;
     color: inherit;
     filter: brightness(110%);
+    cursor: pointer;
   }
   button.danger {
     background-color: #a32;
@@ -385,6 +386,14 @@
   button:active {
     border-style: solid;
     filter: brightness(90%) contrast(120%);
+  }
+  input {
+    background-color: #335;
+    color: inherit;
+    font-size: inherit;
+    font-family: 'Cousine', monospace;
+    padding: 0.25ch;
+    border-color: #4e3d54;
   }
   #usage {
     font-family: 'Anybody', sans-serif;
@@ -450,8 +459,8 @@
     background-color: inherit;
     border-color: darkgray;
   }
-  .shortlink.new {
-    margin-block-start: var(--s4);
+  .shortlink.new input[name=toward]{
+    inline-size: 35ch;
   }
   .shortlink.new h3 {
     margin-top: 0;
