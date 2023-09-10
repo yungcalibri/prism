@@ -168,6 +168,21 @@
           -.u.scat
         (send [303 ~ [%redirect '/apps/prism']])
         ::
+          [%apps %prism %validate %unique ~]
+        ::  check whether the shortlink is unique
+        ?~  body.request.inbound-request  derp
+        =/  jon=(unit json)
+          (de:json:html q.u.body.request.inbound-request)
+        ?~  jon  derp
+        ::  same inputs as the direct action, just use dejs-direct
+        =/  act=prism-action  (dejs-direct +.jon)
+        ::  satisfy the type checker by insisting that this is a %direct
+        ?.  ?=([%direct *] act)  derp
+        :_  state
+        ?.  (~(has by paths) wright.act)
+          (send [200 ~ [%none ~]])
+        (send [200 ~ [%plain "{(trip wright.act)} is already bound!"]])
+        ::
           [%apps %prism @t %defect ~]
         ::  attempt to handle the %defect action
         =/  scat=(unit (quip card _state))
