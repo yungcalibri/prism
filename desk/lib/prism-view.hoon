@@ -39,7 +39,7 @@
       ;script:"htmx.logAll();"
       ;style: {style}
     ==
-    ;body(hx-ext "json-enc,include-vals")
+    ;body(hx-boost "true", hx-ext "json-enc,include-vals")
     ::
     ;*  kid
     ::
@@ -302,28 +302,36 @@
           =hx-target  "#content"
           =hx-select  "#content"
           ;sidebar-l(side "right", sideWidth "5em")
-            ;stack-l(space "var(--s-2)")
-              ;label
+            ;div
+              ;label(for "direct-wright")
                 ; From:
-                ;br;
-                ;code: /apps/prism/
-                ;input
+              ==
+              ;div(style "display: block-inline")
+                ;code(style "display: inline"): /apps/prism/
+                ;input#direct-wright
+                  =hx-post      "/apps/prism/validate/unique"
+                  =hx-trigger   "keyup changed delay:300ms"
+                  =hx-target    "next .error"
+                  =hx-select    "unset"
                   =name         "wright"
                   =type         "text"
-                  =pattern      "[a-zA-Z-._~]+"
                   =required     ""
                   =placeholder  "vienna"
                   =style        "color: #f95";
               ==
-              ;label
-                ; To:
-                ;br;
-                ;input
-                  =name         "toward"
-                  =type         "url"
-                  =required     ""
-                  =placeholder  "https://vienna.earth/";
+              ;div(style "display: flex;")
+                ;div(style "font-family: 'Cousine'; width: 13ch;");
+                ;div.error;
               ==
+              ;label(for "direct-toward")
+                ; To:
+              ==
+              ;br;
+              ;input#direct-toward
+                =name         "toward"
+                =type         "url"
+                =required     ""
+                =placeholder  "https://vienna.earth/";
             ==
             ;stack-l(class "justify-content:end")
               ;button: Create
@@ -471,6 +479,12 @@
   .shortlink.new form {
     margin-top: 0;
     margin-bottom: 0;
+  }
+  .error {
+    color: #a32;
+    font-size: 80%;
+    min-height: 1.5lh;
+    padding-block: 0.25lh;
   }
   '''
 --
