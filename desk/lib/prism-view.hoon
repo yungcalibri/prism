@@ -33,10 +33,20 @@
       ;script
         =nomodule  ""
         =src       "https://unpkg.com/@yungcalibri/layout@0.1.5/dist/bundle.js";
-      ;script(src "https://unpkg.com/htmx.org@1.9.0");
-      ;script(src "https://unpkg.com/htmx.org@1.9.0/dist/ext/json-enc.js");
-      ;script(src "https://unpkg.com/htmx.org@1.9.0/dist/ext/include-vals.js");
+      ;script
+        =async  ""
+        =src    "https://unpkg.com/htmx.org@1.9.0";
+      ;script
+        =async  ""
+        =src    "https://unpkg.com/htmx.org@1.9.0/dist/ext/json-enc.js";
+      ;script
+        =async  ""
+        =src    "https://unpkg.com/htmx.org@1.9.0/dist/ext/include-vals.js";
+      ;script
+        =async  ""
+        =src    "https://unpkg.com/hyperscript.org@0.9.11";
       ;script:"htmx.logAll();"
+      ;script(type "text/hyperscript"):"on load set localStorage['prism-version'] to '[0,6,1]'"
       ;style: {style}
     ==
     ;body(hx-ext "json-enc,include-vals")
@@ -143,7 +153,7 @@
     ; redirects are not stored with all of their associated data. Think
     ; of it like a people counter.)
   ==
-  ;img@"https://s3.us-west-004.backblazeb2.com/demiurge/normul-postem/2023.7.18..04.42.00-d735aaec09f5d1c0079f22e577591157.png"(width "100%");
+  ;img@"https://f004.backblazeb2.com/file/demiurge/normul-postem/counter.gif"(width "100%");
   ;p
     ; As I mentioned above, I have no idea what I should add to the UI next.
     ; So please get in touch to tell me what you want to see here! The best
