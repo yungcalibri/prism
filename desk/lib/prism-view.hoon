@@ -239,6 +239,53 @@
         ;/  "No shortlinks created yet"
   ==
   ;stack-l(space "var(--s0)")
+    ;section(class "shortlink new")
+      ;stack-l
+        ;h3: New shortlink
+        ;form#new-shortlink
+          =hx-post    "/apps/prism/direct"
+          =hx-target  "#content"
+          =hx-select  "#content"
+          ;sidebar-l(side "right", sideWidth "5em")
+            ;div
+              ;label(for "direct-wright")
+                ; From:
+              ==
+              ;div(style "display: block-inline")
+                ;code(style "display: inline"): /apps/prism/
+                ;input#direct-wright
+                  =hx-post      "/apps/prism/validate/unique"
+                  =hx-trigger   "keyup changed delay:300ms"
+                  =hx-target    "next .error"
+                  =hx-select    "unset"
+                  =name         "wright"
+                  =type         "text"
+                  =required     ""
+                  =placeholder  "vienna"
+                  =style        "color: #f95";
+              ==
+              ;div(style "display: flex;")
+                ;div(style "font-family: 'Cousine'; width: 13ch;");
+                ;div.error;
+              ==
+              ;label(for "direct-toward")
+                ; To:
+              ==
+              ;br;
+              ;input#direct-toward
+                =name         "toward"
+                =type         "url"
+                =required     ""
+                =placeholder  "https://vienna.earth/";
+            ==
+            ;stack-l(class "justify-content:end")
+              ;button: Create
+            ==
+          ==
+        ==
+      ==
+    ==
+    ;hr;
     ;*  %+  turn
       ~(tap by paths)
     |=  [wright=@ta toward=@t]
@@ -289,53 +336,6 @@
             =hx-target  "#content"
             =hx-select  "#content"
             ;+  ;/  ?.(brat "Disable" "Enable")
-          ==
-        ==
-      ==
-    ==
-    ;hr;
-    ;section(class "shortlink new")
-      ;stack-l
-        ;h3: New shortlink
-        ;form#new-shortlink
-          =hx-post    "/apps/prism/direct"
-          =hx-target  "#content"
-          =hx-select  "#content"
-          ;sidebar-l(side "right", sideWidth "5em")
-            ;div
-              ;label(for "direct-wright")
-                ; From:
-              ==
-              ;div(style "display: block-inline")
-                ;code(style "display: inline"): /apps/prism/
-                ;input#direct-wright
-                  =hx-post      "/apps/prism/validate/unique"
-                  =hx-trigger   "keyup changed delay:300ms"
-                  =hx-target    "next .error"
-                  =hx-select    "unset"
-                  =name         "wright"
-                  =type         "text"
-                  =required     ""
-                  =placeholder  "vienna"
-                  =style        "color: #f95";
-              ==
-              ;div(style "display: flex;")
-                ;div(style "font-family: 'Cousine'; width: 13ch;");
-                ;div.error;
-              ==
-              ;label(for "direct-toward")
-                ; To:
-              ==
-              ;br;
-              ;input#direct-toward
-                =name         "toward"
-                =type         "url"
-                =required     ""
-                =placeholder  "https://vienna.earth/";
-            ==
-            ;stack-l(class "justify-content:end")
-              ;button: Create
-            ==
           ==
         ==
       ==
