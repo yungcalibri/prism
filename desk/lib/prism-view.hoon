@@ -66,8 +66,8 @@
       ;hr;
       ;nav(class "justify-content:end")
         ;stack-l(space "var(--s0)", style "align-items: stretch;")
-          ;a/"/apps/prism": About Prism
-          ;a/"/apps/prism/shortlinks": Shortlinks
+          ;a/"/apps/prism": Shortlinks
+          ;a/"/apps/prism/about": About Prism
         ==
       ==
       ;hr;
@@ -99,8 +99,8 @@
   ==
   ::  end content
   ==
-::  +home: home page (for the beta, anyway) with details about Prism
-++  home
+::  +about: details about Prism
+++  about
   ^-  manx
   %-  page
   ;*  ;=
@@ -262,7 +262,10 @@
             ==
             ;div
               ; To:
-              ;a/"{(trip toward)}"
+              ;a
+                =target  "_blank"
+                =rel     "noopener noreferer"
+                =href    "{(trip toward)}"
                 ;code: {(trip toward)}
               ==
             ==

@@ -137,11 +137,15 @@
       ::
           [%apps %prism ~]
         :_  state
-        (send [200 ~ [%manx ~(home view state)]])
+        (send [200 ~ [%manx ~(shortlinks view state)]])
       ::
           [%apps %prism %shortlinks ~]
         :_  state
-        (send [200 ~ [%manx ~(shortlinks view state)]])
+        (send [303 ~ [%redirect '/apps/prism']])
+      ::
+          [%apps %prism %about ~]
+        :_  state
+        (send [200 ~ [%manx ~(about view state)]])
       ==
     ::  authenticated POST
     ++  pot
@@ -162,7 +166,7 @@
         :_  +.u.scat
         %+  weld
           -.u.scat
-        (send [303 ~ [%redirect '/apps/prism/shortlinks']])
+        (send [303 ~ [%redirect '/apps/prism']])
         ::
           [%apps %prism @t %defect ~]
         ::  attempt to handle the %defect action
@@ -175,7 +179,7 @@
         :_  +.u.scat
         %+  weld
           -.u.scat
-        (send [303 ~ [%redirect '/apps/prism/shortlinks']])
+        (send [303 ~ [%redirect '/apps/prism']])
       ::
           [%apps %prism @t %renege ~]
         =/  scat=(unit (quip card _state))
@@ -185,7 +189,7 @@
         :_  +.u.scat
         %+  weld
           -.u.scat
-        (send [303 ~ [%redirect '/apps/prism/shortlinks']])
+        (send [303 ~ [%redirect '/apps/prism']])
       ::
           [%apps %prism @t %delete ~]
         =/  scat=(unit (quip card _state))
@@ -195,7 +199,7 @@
         :_  +.u.scat
         %+  weld
           -.u.scat
-        (send [303 ~ [%redirect '/apps/prism/shortlinks']])
+        (send [303 ~ [%redirect '/apps/prism']])
       ==
     --
   ::
