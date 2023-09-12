@@ -114,5 +114,5 @@
   %+  gasp-referer
     req
   spyr
-:: ++  dejs-action
+::
 --

@@ -13,6 +13,12 @@ Use `direct` to create a redirect.
 dojo> :prism|direct ~.dev 'https://developers.urbit.org/'
 ```
 
+Use `divert` to create a redirect from a random path (drawn from the set
+of stars, eg `/apps/prism/ronfeb`).
+```
+dojo> :prism|divert 'https://newgrounds.com/'
+```
+
 Use `defect` to disable an existing redirect.
 ```
 dojo> :prism|defect ~.dev

@@ -240,6 +240,45 @@
         snoop  (~(put by snoop) wright.act *breath)
       ==
     ::
+        %divert
+      ::  generate a random path segment for this redirect
+      ?~  (de-purl:html toward.act)
+        ~|('URL is invalid' !!)
+      ::  random number generation starts from 0, so we need to
+      ::  find the largest two-segment @p, i.e. `@p`(pow 2 16),
+      ::  and then subtract the smallest two-segment patp,
+      ::  which is (pow 2 8, then add one less again.
+      ::  this gives us a random four-segment patp.
+      =/  scope=@ud  (sub (pow 2 16) (pow 2 8))
+      =/  shift=@ud  (sub (pow 2 8) 1)
+      ::  generate a segment we don't already have
+      =/  segment=@ta
+        ::  start with some random patp
+        =/  pat=@p  `@p`(add (~(rad og eny.bowl) scope) shift)
+        |-
+        ::  strip the sig from the front of our random patp
+        =/  strip=@ta
+          ^-  @ta
+          %-  crip
+          ::  interpolate pat into a string, and take its tail,
+          ::  which doesn't include the sig
+          =<  +..  "{<pat>}"
+        ::  if we already have a path like this, add 1 until we find a
+        ::  unique path. there are 64.000 stars, so we will never
+        ::  do this, but still, better safe than sorry!
+        ?:  (~(has by paths) strip)
+          %=  $
+            pat  `@p`(add pat 1)
+          ==
+        strip
+      ::
+      ~&  "/apps/prism/{(trip `@t`segment)} -> {(trip toward.act)}"
+      :-  ~
+      %=  state
+        paths  (~(put by paths) segment toward.act)
+        snoop  (~(put by snoop) segment *breath)
+      ==
+    ::
         %defect
       ?.  (~(has by paths) wright.act)
         ~|("There is no forward from /apps/prism/{<wright.act>}" !!)

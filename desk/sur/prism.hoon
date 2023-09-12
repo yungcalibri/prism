@@ -27,10 +27,12 @@
 ::
 +$  prism-action
   ::  %direct: add a new wright
+  ::  %divert: add a new redirect, generating a random path for the link
   ::  %defect: disable an existing wright
   ::  %renege: re-enable a wright
   ::  %delete: delete a wright
   $%  [%direct =wright toward=@t]
+      [%divert toward=@t]
       [%defect =wright]
       [%renege =wright]
       [%delete =wright]
