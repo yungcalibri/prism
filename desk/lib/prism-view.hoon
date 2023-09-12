@@ -228,6 +228,20 @@
         ;pre
           ;code
             ;span:":prism|"
+            ;em:"divert"
+            ;span:" 'https://newgrounds.com'"
+          ==
+        ==
+        ;div
+          ; to create a redirect from a random path to https://newgrounds.com.
+          ; The random path will be drawn from the set of stars, e.g.:
+          ; /apps/prism/ronfeb
+        ==
+      ==
+      ;div
+        ;pre
+          ;code
+            ;span:":prism|"
             ;em:"defect"
             ;span:" ~.fragment"
           ==
