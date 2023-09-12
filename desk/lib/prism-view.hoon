@@ -287,7 +287,7 @@
     ==
     ;hr;
     ;*  %+  turn
-      (flop ~(tap by paths))
+      ~(tap by paths)
     |=  [wright=@ta toward=@t]
     =/  beth=breath  (~(got by snoop) wright)
     =/  hits  (~(gut bi beth) '' '' 0)
