@@ -16,37 +16,57 @@
       ;title: Prism ◈
       ;meta(charset "utf-8");
       ;link
-        =rel   "stylesheet"
-        =href  "https://unpkg.com/@yungcalibri/layout@0.1.5/dist/bundle.css";
+        =rel          "stylesheet"
+        =crossorigin  "anonymous"
+        =integrity    "sha384-fXCv1dA3EJQwVgsQOvtqiHwOEUBDruR4MiLNatn8wzSPvKLN0N/Pt5TTrpvD/jRf"
+        =href         "https://unpkg.com/@yungcalibri/layout@0.1.5/dist/bundle.css";
       ;link
-        =rel   "stylesheet"
-        =href  "https://unpkg.com/@fontsource/castoro@5.0.5/index.css";
+        =rel          "stylesheet"
+        =crossorigin  "anonymous"
+        =integrity    "sha384-TsegURp4u4GDn4moVNlhIcA9TA49zWcb3PB25Yt38GYhWHj8k9XnG/tT349OiwLj"
+        =href         "https://unpkg.com/@fontsource/castoro@5.0.5/index.css";
       ;link
-        =rel   "stylesheet"
-        =href  "https://unpkg.com/@fontsource/cousine@5.0.5/index.css";
+        =rel          "stylesheet"
+        =crossorigin  "anonymous"
+        =integrity    "sha384-IIe4+cz1X8bsKXwVAeIyn70ILIgciPdFP9KhBKuoEdPLjX4GnRHlbFVdhxdwAaLK"
+        =href         "https://unpkg.com/@fontsource/cousine@5.0.5/index.css";
       ;link
-        =rel   "stylesheet"
-        =href  "https://unpkg.com/@fontsource/anybody@5.0.5/index.css";
+        =rel          "stylesheet"
+        =crossorigin  "anonymous"
+        =integrity    "sha384-8vOzdi5L8N3uQO9qcWWMs64s6jbIYj/k4ndesQSRhtxMlqj+I0F0ROK4pyYZv/dv"
+        =href         "https://unpkg.com/@fontsource/anybody@5.0.5/index.css";
       ;script
-        =type  "module"
-        =src   "https://unpkg.com/@yungcalibri/layout@0.1.5/umd/bundle.js";
+        =type         "module"
+        =crossorigin  "anonymous"
+        =integrity    "sha384-c4SSI79zksulLspZ11E4zHda7VSN8U2rGzjdomNMNrgCA/S93oOe2yqQToNh1tLY"
+        =src          "https://unpkg.com/@yungcalibri/layout@0.1.5/umd/bundle.js";
       ;script
-        =nomodule  ""
-        =src       "https://unpkg.com/@yungcalibri/layout@0.1.5/dist/bundle.js";
+        =nomodule     ""
+        =crossorigin  "anonymous"
+        =integrity    "sha384-39Mph3QgxUJ4Ou1dsJkb8LY0baiOtTwuW7LYX/pqchlr1glQOp1X8LL1LAkTlv5N"
+        =src          "https://unpkg.com/@yungcalibri/layout@0.1.5/dist/bundle.js";
       ;script
-        =async  ""
-        =src    "https://unpkg.com/htmx.org@1.9.0";
+        =async        ""
+        =crossorigin  "anonymous"
+        =integrity    "sha384-aOxz9UdWG0yBiyrTwPeMibmaoq07/d3a96GCbb9x60f3mOt5zwkjdbcHFnKH8qls"
+        =src          "https://unpkg.com/htmx.org@1.9.0";
       ;script
-        =async  ""
-        =src    "https://unpkg.com/htmx.org@1.9.0/dist/ext/json-enc.js";
+        =async        ""
+        =crossorigin  "anonymous"
+        =integrity    "sha384-nRnAvEUI7N/XvvowiMiq7oEI04gOXMCqD3Bidvedw+YNbj7zTQACPlRI3Jt3vYM4"
+        =src          "https://unpkg.com/htmx.org@1.9.0/dist/ext/json-enc.js";
       ;script
-        =async  ""
-        =src    "https://unpkg.com/htmx.org@1.9.0/dist/ext/include-vals.js";
+        =async        ""
+        =crossorigin  "anonymous"
+        =integrity    "sha384-8IQLVSa8SPeOEPFM9W1QHw0NcfoMataSHwhy8Nn9YBopVPLyDPnmR3+LnmZe0c+Q"
+        =src          "https://unpkg.com/htmx.org@1.9.0/dist/ext/include-vals.js";
       ;script
-        =async  ""
-        =src    "https://unpkg.com/hyperscript.org@0.9.11";
+        =async        ""
+        =crossorigin  "anonymous"
+        =integrity    "sha384-SWTvl6gg9wW7CzNqGD9/s3vxwaaKN2g8/eYyu0yT+rkQ/Rb/6NmjnbTi9lYNrpZ1"
+        =src          "https://unpkg.com/hyperscript.org@0.9.11";
       ;script:"htmx.logAll();"
-      ;script(type "text/hyperscript"):"on load set localStorage['prism-version'] to '[0,6,1]'"
+      ;script(type "text/hyperscript"):"on load set localStorage['prism-version'] to '[0,6,2]'"
       ;style: {style}
     ==
     ;body(hx-ext "json-enc,include-vals")

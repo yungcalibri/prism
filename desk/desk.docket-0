@@ -2,7 +2,7 @@
     [%info 'A URL shortener for your urbit']
     [%color 0xff.ffff]
     [%image 'https://f004.backblazeb2.com/file/demiurge/normul-postem/counter.gif']
-    [%version [0 6 1]]
+    [%version [0 6 2]]
     [%website 'https://github.com/yungcalibri/prism']
     [%license 'MIT']
     [%site /apps/prism]
