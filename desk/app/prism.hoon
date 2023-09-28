@@ -4,6 +4,14 @@
 +$  card  card:agent:gall
 +$  versioned-state
   $%  state-0
+      state-1
+  ==
++$  state-1
+  $:  %1
+      =paths
+      =steps
+      =brats
+      =snoop
   ==
 +$  state-0
   $:  %0
@@ -13,7 +21,7 @@
       :: slate=@ta  :: next randomly generated URL fragment
   ==
 --
-=|  state-0
+=|  state-1
 =*  state  -
 %-  agent:dbug
 %+  verb  |
@@ -38,8 +46,29 @@
     |=  old-state=vase
     ^-  (quip card _this)
     =/  old  !<(versioned-state old-state)
-    ?-  -.old
-      %0  [~ this(state old)]
+    ?-    -.old
+        %1
+      [~ this(state old)]
+    ::
+        %0
+      ::  we don't have order info for the old paths, so we have to start by
+      ::  just assigning an order arbitrarily. the UI must allow the
+      ::  user to reorder.
+      =/  spout=(pair (list [wright @ud]) @ud)
+        %^  spin  ~(tap in ~(key by paths.old))
+          1
+        |=([=wright ord=@ud] [[wright ord] (add 2 ord)])
+      ::  spin produces a pair of a list and a noun, and we only want
+      ::  the former.
+      =/  order=^steps  (malt p.spout)
+      =/  new=state-1
+        :*  %1
+            paths.old
+            order
+            brats.old
+            snoop.old
+        ==
+      [~ this(state new)]
     ==
   ::
   ++  on-poke
@@ -221,6 +250,14 @@
   ++  handle-action
     |=  act=prism-action
     ^-  (quip card _state)
+    ::  the last number we added to $steps is the highest number. we
+    ::  don't always minimize the keys in steps (when deleting, for
+    ::  instance), so it makes sense to derive this on demand rather
+    ::  than keeping it in state.
+    =/  max-step=@ud
+      (~(rep by steps) |=([[* ord=@ud] acc=@ud] (max ord acc)))
+    ::  the next step is the next odd integer.
+    =/  next-step=@ud  (add 2 max-step)
     ?-    -.act
         %direct
       ::  ensure we got a valid @ta in the action (this will
@@ -237,6 +274,7 @@
       ::  add the path, initialize its entry in our snoop.state
       %=  state
         paths  (~(put by paths) wright.act toward.act)
+        steps  (~(put by steps) wright.act next-step)
         snoop  (~(put by snoop) wright.act *breath)
       ==
     ::
@@ -276,6 +314,7 @@
       :-  ~
       %=  state
         paths  (~(put by paths) segment toward.act)
+        steps  (~(put by steps) segment next-step)
         snoop  (~(put by snoop) segment *breath)
       ==
     ::
@@ -297,6 +336,7 @@
       ?.  (~(has by paths) wright.act)
         ~|("There is no forward from /apps/prism/{<wright.act>}" !!)
       ?>  (~(has by snoop) wright.act)
+      ::  remove the deleted entry from brats, if it was there.
       =/  clean-brats
         ?:  (~(has in brats) wright.act)
           (~(del in brats) wright.act)
@@ -304,6 +344,7 @@
       :-  ~
       %=  state
         paths  (~(del by paths) wright.act)
+        steps  (~(del by steps) wright.act)
         snoop  (~(del by snoop) wright.act)
         brats  clean-brats
       ==

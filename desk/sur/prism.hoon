@@ -16,6 +16,10 @@
 :: redirect url.
 +$  paths  (map wright @t)
 ::
+::  $steps: maps path segments to the order in which they
+:: should be rendered in the UI. odd integers.
++$  steps  (map wright @ud)
+::
 ::  $brats: set of all disabled wrights.
 +$  brats  (set wright)
 ::

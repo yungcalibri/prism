@@ -1,5 +1,5 @@
 /-  *prism
-|_  [%0 =paths =brats =snoop]
+|_  [%1 =paths =steps =brats =snoop]
 ::
 ++  page
   |=  kid=marl
