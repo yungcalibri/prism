@@ -7,6 +7,11 @@
   =/  vex  version.docket
   "v{<major.vex>}.{<minor.vex>}.{<patch.vex>}"
 ::
+++  version-json
+  ^-  tape
+  =/  vex  version.docket
+  "{<major.vex>}.{<minor.vex>}.{<patch.vex>}"
+::
 ++  page
   |=  kid=marl
   ^-  manx
@@ -64,12 +69,16 @@
         =integrity    "sha384-8IQLVSa8SPeOEPFM9W1QHw0NcfoMataSHwhy8Nn9YBopVPLyDPnmR3+LnmZe0c+Q"
         =src          "https://unpkg.com/htmx.org@1.9.0/dist/ext/include-vals.js";
       ;script
+        =crossorigin  "anonymous"
+        =integrity    "sha384-rxmVjgE5bq1dIwkIxiYTYvnbO8P5U3eqfC/7oVtfj6sKu8M0P6Tozd2uZcmGNgNj"
+        =src          "https://unpkg.com/compare-versions@6.1.0/lib/umd/index.js";
+      ;script
         =async        ""
         =crossorigin  "anonymous"
         =integrity    "sha384-SWTvl6gg9wW7CzNqGD9/s3vxwaaKN2g8/eYyu0yT+rkQ/Rb/6NmjnbTi9lYNrpZ1"
         =src          "https://unpkg.com/hyperscript.org@0.9.11";
       ;script:"htmx.logAll();"
-      ;script(type "text/hyperscript"):"on load set localStorage['prism-version'] to '[0,6,2]'"
+      ;script: {page-script}
       ;style: {style}
     ==
     ;body(hx-boost "true", hx-ext "json-enc,include-vals")
@@ -97,11 +106,18 @@
         ==
       ==
       ;hr;
-      ;nav(class "justify-content:end")
+      ;nav
+        =class  "justify-content:end"
+        =data-script  "on load call updateNotification() then if localStorage['prism-updated'] then add .glow to #updates"
         ;stack-l(space "var(--s0)", style "align-items: stretch;")
           ;a/"/apps/prism": Shortlinks
           ;a/"/apps/prism/about": About Prism
-          ;a#updates/"/apps/prism/updates": Latest Updates
+          ;a
+            =id           "updates"
+            =href         "/apps/prism/updates"
+            =data-script  "on click remove .glow from me then call localStorage.removeItem('prism-updated')"
+            ; Latest Updates
+          ==
         ==
       ==
       ;footer(class "position:sticky bottom:0", style "padding-bottom: 1rem;")
@@ -480,12 +496,35 @@
     ==
   ==
 ::
+++  page-script
+  """
+  function updateNotification() \{
+    if (localStorage['prism-updated']) \{
+      return true;
+    }
+    const latest = {<version-json>};
+    const previous = localStorage.getItem('prism-version');
+    if (
+      !previous ||
+      previous === "[0,6,2]" ||
+      window.compareVersions.compare(latest, previous, '>')
+    ) \{
+      localStorage.setItem('prism-version', latest);
+      localStorage.setItem('prism-updated', true);
+      console.log("Looks like there's a new version in town.");
+    } else \{
+      console.log("No new updates. Yippie-ki-yay.");
+    }
+  }
+  """
+::
 ++  style
   ^~
   %-  trip
   '''
   :root {
     --measure: 80ch;
+    --glow-color: dodgerblue;
   }
   body {
     font-family: 'Castoro', serif;
@@ -621,6 +660,27 @@
     font-size: 80%;
     min-height: 1.5lh;
     padding-block: 0.25lh;
+  }
+  .glow {
+    position: relative;
+  }
+  .glow::before {
+    content: "◈";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: var(--glow-color);
+    pointer-events: none;
+    opacity: 0;
+    animation: pulse 3s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
   }
   '''
 --
