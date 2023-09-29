@@ -46,17 +46,14 @@
         =integrity    "sha384-39Mph3QgxUJ4Ou1dsJkb8LY0baiOtTwuW7LYX/pqchlr1glQOp1X8LL1LAkTlv5N"
         =src          "https://unpkg.com/@yungcalibri/layout@0.1.5/dist/bundle.js";
       ;script
-        =async        ""
         =crossorigin  "anonymous"
         =integrity    "sha384-aOxz9UdWG0yBiyrTwPeMibmaoq07/d3a96GCbb9x60f3mOt5zwkjdbcHFnKH8qls"
         =src          "https://unpkg.com/htmx.org@1.9.0";
       ;script
-        =async        ""
         =crossorigin  "anonymous"
         =integrity    "sha384-nRnAvEUI7N/XvvowiMiq7oEI04gOXMCqD3Bidvedw+YNbj7zTQACPlRI3Jt3vYM4"
         =src          "https://unpkg.com/htmx.org@1.9.0/dist/ext/json-enc.js";
       ;script
-        =async        ""
         =crossorigin  "anonymous"
         =integrity    "sha384-8IQLVSa8SPeOEPFM9W1QHw0NcfoMataSHwhy8Nn9YBopVPLyDPnmR3+LnmZe0c+Q"
         =src          "https://unpkg.com/htmx.org@1.9.0/dist/ext/include-vals.js";
@@ -274,6 +271,11 @@
 ::  (eventually) provides controls to manage them.
 ++  shortlinks
   ^-  manx
+  =/  sorted-paths=(list (pair wright @t))
+    %+  sort
+      ~(tap by paths)
+    |=  [[a=wright *] [b=wright *]]
+    (gth (~(got by steps) a) (~(got by steps) b))
   %-  page
   ;*  ;=
   ::  begin content
@@ -331,7 +333,7 @@
     ==
     ;hr;
     ;*  %+  turn
-      ~(tap by paths)
+      sorted-paths
     |=  [wright=@ta toward=@t]
     =/  beth=breath  (~(got by snoop) wright)
     =/  hits  (~(gut bi beth) '' '' 0)
