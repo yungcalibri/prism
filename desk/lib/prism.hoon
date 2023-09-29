@@ -10,6 +10,14 @@
   %.  jon
   (ot ~[wright+so toward+so])
 ::
+++  dejs-divert
+  |=  jon=json
+  =,  dejs:format
+  ^-  prism-action
+  :-  %divert
+  %.  jon
+  (ot ~[toward+so])
+::
 ++  utm-parameters
   ^~
   ^-  (set @t)

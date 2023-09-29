@@ -172,6 +172,14 @@
         :_  state
         (send [303 ~ [%redirect '/apps/prism']])
       ::
+          [%apps %prism %direct ~]
+        :_  state
+        (send [200 ~ [%manx ~(direct view state)]])
+      ::
+          [%apps %prism %divert ~]
+        :_  state
+        (send [200 ~ [%manx ~(divert view state)]])
+      ::
           [%apps %prism %about ~]
         :_  state
         (send [200 ~ [%manx ~(about view state)]])
@@ -211,6 +219,21 @@
         ?.  (~(has by paths) wright.act)
           (send [200 ~ [%none ~]])
         (send [200 ~ [%plain "{(trip wright.act)} is already bound!"]])
+        ::
+          [%apps %prism %divert ~]
+        ?~  body.request.inbound-request  derp
+        =/  jon=(unit json)
+          (de:json:html q.u.body.request.inbound-request)
+        ?~  jon  derp
+        =/  act=prism-action  (dejs-divert +.jon)
+        =/  scat=(unit (quip card _state))
+          %-  mole
+          |.  (handle-action act)
+        ?~  scat  derp
+        :_  +.u.scat
+        %+  weld
+          -.u.scat
+        (send [303 ~ [%redirect '/apps/prism']])
         ::
           [%apps %prism @t %defect ~]
         ::  attempt to handle the %defect action

@@ -285,52 +285,7 @@
         ;/  "No shortlinks created yet"
   ==
   ;stack-l(space "var(--s0)")
-    ;section(class "shortlink new")
-      ;stack-l
-        ;h3: New shortlink
-        ;form#new-shortlink
-          =hx-post    "/apps/prism/direct"
-          =hx-target  "#content"
-          =hx-select  "#content"
-          ;sidebar-l(side "right", sideWidth "5em")
-            ;div
-              ;label(for "direct-wright")
-                ; From:
-              ==
-              ;div(style "display: block-inline")
-                ;code(style "display: inline"): /apps/prism/
-                ;input#direct-wright
-                  =hx-post      "/apps/prism/validate/unique"
-                  =hx-trigger   "keyup changed delay:300ms"
-                  =hx-target    "next .error"
-                  =hx-select    "unset"
-                  =name         "wright"
-                  =type         "text"
-                  =required     ""
-                  =placeholder  "vienna"
-                  =style        "color: #f95";
-              ==
-              ;div(style "display: flex;")
-                ;div(style "font-family: 'Cousine'; width: 13ch;");
-                ;div.error;
-              ==
-              ;label(for "direct-toward")
-                ; To:
-              ==
-              ;br;
-              ;input#direct-toward
-                =name         "toward"
-                =type         "url"
-                =required     ""
-                =placeholder  "https://vienna.earth/";
-            ==
-            ;stack-l(class "justify-content:end")
-              ;button: Create
-            ==
-          ==
-        ==
-      ==
-    ==
+    ;+  divert:.
     ;hr;
     ;*  %+  turn
       sorted-paths
@@ -388,6 +343,99 @@
     ==
   ==
   ::  end content
+  ==
+::
+++  direct
+  ^-  manx
+  ;section(class "shortlink new", data-prism-action "direct")
+    ;stack-l
+      ;h3: New shortlink
+      ;form#new-shortlink
+        =hx-post    "/apps/prism/direct"
+        =hx-target  "#content"
+        =hx-select  "#content"
+        ;sidebar-l(side "right", sideWidth "5em")
+          ;div
+            ;label(for "direct-toward")
+              ; To:
+            ==
+            ;br;
+            ;input#direct-toward
+              =name         "toward"
+              =type         "url"
+              =required     ""
+              =placeholder  "https://vienna.earth/";
+            ;br;
+            ;br;
+            ;label(for "direct-wright")
+              ; From:
+            ==
+            ;div(style "display: block-inline")
+              ;code(style "display: inline"): /apps/prism/
+              ;input#direct-wright
+                =hx-post      "/apps/prism/validate/unique"
+                =hx-trigger   "keyup changed delay:300ms"
+                =hx-target    "next .error"
+                =hx-select    "unset"
+                =name         "wright"
+                =type         "text"
+                =required     ""
+                =placeholder  "vienna"
+                =style        "color: #f95";
+            ==
+            ;div(style "display: flex;")
+              ;div(style "font-family: 'Cousine'; width: 13ch;");
+              ;div.error;
+            ==
+          ==
+          ;stack-l(class "justify-content:end")
+            ;button: Create
+          ==
+        ==
+      ==
+    ==
+  ==
+::
+++  divert
+  ^-  manx
+  ;section(class "shortlink new", data-prism-action "divert")
+    ;stack-l
+      ;h3: New shortlink
+      ;form#new-shortlink
+        =hx-post    "/apps/prism/divert"
+        =hx-target  "#content"
+        =hx-select  "#content"
+        ;sidebar-l(side "right", sideWidth "5em")
+          ;div
+            ;label(for "divert-toward")
+              ; To:
+            ==
+            ;br;
+            ;input#divert-toward
+              =name         "toward"
+              =type         "url"
+              =required     ""
+              =placeholder  "https://vienna.earth/";
+            ;br;
+            ;p
+              ; A URL segment will be generated automatically.
+              ; You can also
+              ;a
+                =href       ""
+                =hx-get     "/apps/prism/direct"
+                =hx-target  "closest .shortlink.new"
+                =hx-swap    "outerHTML"
+                =hx-select  "unset"
+                ; configure a custom path for this redirect.
+              ==
+            ==
+          ==
+          ;stack-l(class "justify-content:end")
+            ;button: Create
+          ==
+        ==
+      ==
+    ==
   ==
 ::
 ++  style
