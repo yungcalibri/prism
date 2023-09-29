@@ -1,5 +1,11 @@
 /-  *prism
+/*  docket  %docket-0  /desk/docket-0
 |_  [%1 =paths =steps =brats =snoop]
+::
+++  version
+  ^-  tape
+  =/  vex  version.docket
+  "v{<major.vex>}.{<minor.vex>}.{<patch.vex>}"
 ::
 ++  page
   |=  kid=marl
@@ -98,8 +104,11 @@
         ==
       ==
       ;hr;
-      ;footer(class "position:sticky bottom:0")
-        ;cluster-l(class "justify-content:end")
+      ;footer(class "position:sticky bottom:0", style "padding-bottom: 1rem;")
+        ;cluster-l(class "justify-content:end", space "var(--s-1)")
+          ;small
+            ;+  ;/  version:.
+          ==
           ;a/"https://github.com/yungcalibri/prism": Prism on Github
         ==
       ==
