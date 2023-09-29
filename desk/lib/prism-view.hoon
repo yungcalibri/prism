@@ -101,9 +101,9 @@
         ;stack-l(space "var(--s0)", style "align-items: stretch;")
           ;a/"/apps/prism": Shortlinks
           ;a/"/apps/prism/about": About Prism
+          ;a#updates/"/apps/prism/updates": Latest Updates
         ==
       ==
-      ;hr;
       ;footer(class "position:sticky bottom:0", style "padding-bottom: 1rem;")
         ;cluster-l(class "justify-content:end", space "var(--s-1)")
           ;small
@@ -203,6 +203,39 @@
       ==
     ==
     ; Hope you enjoy.
+  ==
+  ::  end content
+  ==
+::
+::  +updates: latest updates
+++  updates
+  ^-  manx
+  %-  page
+  ;*  ;=
+  ::  begin content
+  ;h2: v0.7.0
+  ;p
+    ; Quality-of-life improvements!
+    ;ul
+      ;li: The shortlinks page is now the main page for the app.
+      ;li
+        ; By default, the web UI will now randomly generate
+        ; a shortlink URL drawn from the star namespace.
+        ; This behavior is available in the terminal as well;
+        ; see
+        ;code:":prism|divert"
+        ; under
+        ;a/"#usage": Usage.
+      ==
+      ;li
+        ; New links will now be shown in the order in which
+        ; they were added. (Since there was no order
+        ; information before, links added before v0.7.0 will
+        ; appear in the same order they used to.
+        ; Reordering from the UI will be possible in a future
+        ; version.)
+      ==
+    ==
   ==
   ::  end content
   ==

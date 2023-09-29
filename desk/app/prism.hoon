@@ -183,6 +183,10 @@
           [%apps %prism %about ~]
         :_  state
         (send [200 ~ [%manx ~(about view state)]])
+      ::
+          [%apps %prism %updates ~]
+        :_  state
+        (send [200 ~ [%manx ~(updates view state)]])
       ==
     ::  authenticated POST
     ++  pot
