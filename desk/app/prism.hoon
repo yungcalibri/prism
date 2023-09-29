@@ -83,7 +83,6 @@
       [cards this]
       ::
         %handle-http-request
-      ?>  =(src.bowl our.bowl)
       =/  req  !<([eyre-id=@ta =inbound-request:eyre] vase)
       ::  ehh. is it worth feeding this into handle-http?
       :: or is that pointless?
@@ -93,7 +92,7 @@
       =^  cards  state
         ^-  (quip card _state)
         ::  unauthenticated requests are all handled by the pub arm.
-        ?.  authenticated.inbound-request.req
+        ?.  =(src.bowl our.bowl)
           ~(pub handle-http:hc req)
         ::  authenticated requests are handled by the arm matching
         ::  the request method.
